@@ -1,7 +1,9 @@
 package co.edu.uco.nose.data.dao;
 
-public interface UserDAO 
+import java.util.UUID;
+
+public interface UserDAO
 	extends CreateDAO<UserEntity>, UpdateDAO<UserEntity>, {
-	RetrieveDAO<UserEntity UUID>, DeleteDAO<UUID> 
+	RetrieveDAO<UserEntity, UUID>, DeleteDAO<UUID>;
 
 }

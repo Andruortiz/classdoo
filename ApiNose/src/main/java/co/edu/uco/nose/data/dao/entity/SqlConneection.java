@@ -3,6 +3,8 @@ package co.edu.uco.nose.data.dao.entity;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 
+import java.sql.Connection;
+
 public abstract class SqlConneection {
 	
 	private Connection connection;

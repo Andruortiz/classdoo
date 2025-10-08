@@ -1,5 +1,4 @@
 package co.edu.uco.nose.data.dao;
-Dpackage co.edu.uco.nose.data.dao;
 
 public interface UpdateDAO<E> {
 	

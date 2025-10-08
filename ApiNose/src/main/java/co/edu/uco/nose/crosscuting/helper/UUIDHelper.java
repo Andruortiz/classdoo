@@ -20,9 +20,7 @@ public final class UUIDHelper {
 	}
 	
 	public UUID getDefault(final UUID value) {
-		return ObjectHelper.getDefault(value, getDefault()){
-			
-		}
+		return ObjectHelper.getDefault(value, getDefault());
 	}
 
 	public UUID getFromString(
