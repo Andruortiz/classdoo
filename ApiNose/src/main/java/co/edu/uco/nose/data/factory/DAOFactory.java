@@ -1,6 +1,6 @@
 package co.edu.uco.nose.data.factory;
 
-import com.sun.jdi.connect.spi.Connection;
+import java.sql.Connection;
 
 import co.edu.uco.nose.data.dao.UserDAO;
 import co.edu.uco.nose.data.dao.entity.CityDAO;
@@ -17,7 +17,6 @@ public abstract class DAOFactory {
 	
 	
 	public static DAOFactory getFactory() {
-		
 		return null;
 	}
 	

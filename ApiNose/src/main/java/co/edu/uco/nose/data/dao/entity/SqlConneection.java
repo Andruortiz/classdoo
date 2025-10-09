@@ -5,7 +5,7 @@ import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 
 import java.sql.Connection;
 
-public abstract class SqlConneection {
+public abstract class SqlConnection {
 	
 	private Connection connection;
 	
@@ -20,8 +20,8 @@ public abstract class SqlConneection {
 
 	protected void setConnection(final Connection connection) {
 		if (ObjectHelper.IsNull(connection)) {
-			var userMessage = "";
-			var technicalMessage = "";
+			var userMessage = "No se ha recibido una conexión válida a la base de datos.";
+            var technicalMessage = "La conexión SQL recibida es nula.";
 			throw NoseException.create(null, null);
 		}
 		this.connection = connection;
