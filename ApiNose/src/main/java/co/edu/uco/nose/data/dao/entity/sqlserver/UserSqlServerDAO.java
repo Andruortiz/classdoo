@@ -3,10 +3,15 @@ package co.edu.uco.nose.data.dao.entity.sqlserver;
 import co.edu.uco.nose.data.dao.UserDAO;
 import co.edu.uco.nose.entity.UserEntity;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.UUID;
 
 public final class UserSqlServerDAO implements UserDAO {
+
+    public UserSqlServerDAO(final Connection connection) {
+        super(connection);
+    }
 
 	@Override
 	public void create(UserEntity entity) {

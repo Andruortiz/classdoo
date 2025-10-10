@@ -4,6 +4,7 @@ import co.edu.uco.nose.data.dao.entity.CityDAO;
 import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.entity.CityEntity;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.UUID;
 

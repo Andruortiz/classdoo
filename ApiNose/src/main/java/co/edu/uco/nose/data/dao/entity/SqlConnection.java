@@ -41,5 +41,28 @@ import java.sql.SQLException;
         this.connection = connection;
         }
 
+
+
+    private void ensureTransactionIsStarted()  {
+        try {
+            if (ObjectHelper.IsNull(getConnection()) || getConnection().isClosed()) {
+                var userMessage = MessagesEnum.USER_ERROR_SQL_TRANSACTION_IS_NOT_STARTED.getContent();
+                var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_TRANSACTION_IS_NOT_STARTED.getContent();
+                throw NoseException.create(userMessage, technicalMessage);
+            }
+
+            if (getConnection().getAutoCommit()) {
+                var userMessage = MessagesEnum.USER_ERROR_SQL_TRANSACTION_IS_NOT_STARTED.getContent();
+                var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_TRANSACTION_IS_NOT_STARTED.getContent();
+                throw NoseException.create(userMessage, technicalMessage);
+            }
+
+        } catch (final SQLException exception) {
+            var userMessage = MessagesEnum.USER_ERROR_SQL_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_STATUS.getContent();
+            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS.getContent();
+            throw NoseException.create(exception, userMessage, technicalMessage);
+        }
+    }
+
 	}
 
