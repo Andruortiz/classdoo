@@ -11,26 +11,28 @@ public final class NoseException extends RuntimeException {
     private String userMessage;
     private String technicalMessage;
 
-    // ✅ Constructor completo (debe recibir los tres parámetros)
+
+
     private NoseException(final Throwable rootException, final String userMessage, final String technicalMessage) {
         setRootException(rootException);
         setUserMessage(userMessage);
         setTechnicalMessage(technicalMessage);
     }
 
-    // ✅ Método de creación estático correcto
+
     public static NoseException create(final Throwable rootException, final String userMessage, final String technicalMessage) {
         return new NoseException(rootException, userMessage, technicalMessage);
     }
 
-    // ✅ Sobrecarga opcional: si solo tienes mensaje de usuario
-    public static NoseException create(final String userMessage) {
-        return new NoseException(null, userMessage, TextHelper.getDefault());
+
+    public static NoseException create(final String userMessage, final String technicalMessage) {
+        return new NoseException(new Exception(), userMessage, technicalMessage);
     }
 
-    // ✅ Sobrecarga opcional: si tienes excepción raíz y mensaje de usuario
-    public static NoseException create(final Throwable rootException, final String userMessage) {
-        return new NoseException(rootException, userMessage, TextHelper.getDefault());
+
+
+    public static NoseException create(final String userMessage) {
+        return new NoseException(new Exception(), userMessage, userMessage);
     }
 
     // Getters y Setters
@@ -58,7 +60,4 @@ public final class NoseException extends RuntimeException {
         this.technicalMessage = TextHelper.getDefaultWithTrim(technicalMessage);
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 }

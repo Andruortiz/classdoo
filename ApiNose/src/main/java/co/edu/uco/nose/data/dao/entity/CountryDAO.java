@@ -1,5 +1,7 @@
 package co.edu.uco.nose.data.dao.entity;
 
-public interface CountryDAO {
+import co.edu.uco.nose.data.dao.RetrieveDAO;
+
+public interface CountryDAO extends RetrieveDAO<CountryEntity, UUID> {
 
 }
