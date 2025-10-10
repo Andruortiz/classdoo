@@ -12,7 +12,6 @@ public abstract class DAOFactory {
 	
 	
 	protected Connection connection;
-	
 	protected FactoryEnum factory = FactoryEnum.SQLSERVER;
 	
 	
