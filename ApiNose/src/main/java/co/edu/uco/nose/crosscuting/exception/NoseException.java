@@ -30,7 +30,6 @@ public final class NoseException extends RuntimeException {
     }
 
 
-
     public static NoseException create(final String userMessage) {
         return new NoseException(new Exception(), userMessage, userMessage);
     }

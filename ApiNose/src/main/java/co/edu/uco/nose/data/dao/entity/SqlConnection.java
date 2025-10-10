@@ -8,12 +8,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
  public abstract class SqlConnection {
-	
+
 	private Connection connection;
-	
-	protected SqlConnection() {
+
+	protected SqlConnection(final Connection connection) {
 		setConnection(connection);
-		
+
 	}
 
 	protected Connection getConnection() {
@@ -22,22 +22,24 @@ import java.sql.SQLException;
 
 	private void setConnection(final Connection connection) {
 		if (ObjectHelper.IsNull(connection)) {
-			var userMessage = MessagesEnum.USER_ERROR_SQLCONNECTION_ID_EMPTY.getContent();
-            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQLCONNECTION_ID_EMPTY.getContent();
+			var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_EMPTY.getContent();
+            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_EMPTY.getContent();
 			throw NoseException.create(userMessage, technicalMessage);
 		}
         try {
             if(connection.isClosed()){
+                var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_CLOSED.getContent();
+                var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_CLOSED.getContent();
+                throw NoseException.create(userMessage, technicalMessage);
 
             }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (final SQLException exception) {
+            var userMessage = MessagesEnum.USER_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS.getContent();
+            var technicalMessage = MessagesEnum.TECHNICAL_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS.getContent();
+            throw NoseException.create(exception, userMessage, technicalMessage);
             }
-
+        this.connection = connection;
         }
 
-
-		this.connection = connection;
 	}
 
-}
