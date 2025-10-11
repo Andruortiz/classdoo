@@ -1,7 +1,6 @@
 package co.edu.uco.nose.data.dao.entity;
 
 import co.edu.uco.nose.data.dao.RetrieveDAO;
-import co.edu.uco.nose.entity.CountryEntity;
 import co.edu.uco.nose.entity.StateEntity;
 
 import java.util.UUID;

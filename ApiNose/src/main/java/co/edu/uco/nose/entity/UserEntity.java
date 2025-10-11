@@ -8,7 +8,7 @@ public final class UserEntity {
     private IdTypeEntity idType;
     private String identificationNumber;
     private String firstName;
-    private String middleName;
+    private String secondName;
     private String firstLastName;
     private String secondLastName;
     private CityEntity residenceCity;
@@ -28,7 +28,7 @@ public final class UserEntity {
         this.idType = idType;
         this.identificationNumber = identificationNumber;
         this.firstName = firstName;
-        this.middleName = middleName;
+        this.secondName = middleName;
         this.firstLastName = firstLastName;
         this.secondLastName = secondLastName;
         this.residenceCity = residenceCity;
@@ -70,12 +70,12 @@ public final class UserEntity {
         this.firstName = firstName;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setMiddleName(final String middleName) {
-        this.middleName = middleName;
+    public void setSecondName(final String secondName) {
+        this.secondName = secondName;
     }
 
     public String getFirstLastName() {
