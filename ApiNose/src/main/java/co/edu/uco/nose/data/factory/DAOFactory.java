@@ -5,11 +5,7 @@ import java.sql.SQLException;
 
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.SqlConnectionHelper;
-import co.edu.uco.nose.data.dao.UserDAO;
-import co.edu.uco.nose.data.dao.entity.CityDAO;
-import co.edu.uco.nose.data.dao.entity.CountryDAO;
-import co.edu.uco.nose.data.dao.entity.IdTypeDAO;
-import co.edu.uco.nose.data.dao.entity.StateDAO;
+import co.edu.uco.nose.data.dao.entity.*;
 import co.edu.uco.nose.data.factory.sqlserver.SqlServerDAOFactory;
 
 /**

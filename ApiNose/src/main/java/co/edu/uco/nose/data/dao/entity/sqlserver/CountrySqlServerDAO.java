@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public final class CountrySqlServerDAO extends SqlConnection implements CountryDAO {
 
-    CountrySqlServerDAO(final Connection connection) {
+    public CountrySqlServerDAO(final Connection connection) {
         super(connection);
     }
 

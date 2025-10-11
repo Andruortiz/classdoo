@@ -3,95 +3,72 @@ package co.edu.uco.nose.crosscuting.messagecatalog;
 public enum MessagesEnum {
 
 
-    USER_ERROR_SQL_CONNECTION_IS_EMPTY(
-            "No se pudo establecer conexión con la base de datos.",
-            "El objeto Connection es nulo."),
+    USER_ERROR_SQL_CONNECTION_IS_EMPTY("Conexion contra la fuente de informacion deseada vacia",
+            "La conexion requerida para llevar a cabo la operacion contra la fuente de informacion deseada está vacia. "
+                    + "Por favor intente de nuevo y si el problema persiste contacte al administrador de la aplicacion"),
 
-    TECHNICAL_ERROR_SQL_CONNECTION_IS_EMPTY(
-            "Error técnico al validar conexión nula.",
-            "Connection recibido es null en la capa de datos."),
+    TECHNICAL_ERROR_SQL_CONNECTION_IS_EMPTY("Conexion contra la fuente de informacion deseada nula",
+            "La conexion requerida para llevar a cabo la operacion contra la base de datos llegó nula."
+                    + "Por favor intenta de nuevo y si el problema persiste, contacte al administrador de la aplicación"),
 
-    USER_ERROR_SQL_CONNECTION_IS_CLOSED(
-            "La conexión con la base de datos está cerrada.",
-            "Intentó usarse una conexión cerrada para ejecutar operaciones."),
+    USER_ERROR_SQL_CONNECTION_IS_CLOSED("Conexion contra la fuente de informacion deseada cerrada",
+            "La conexion requerida para llevar a cabo la operacion contra la fuente de informacion deseada está cerrada. "
+                    + "Por favor intente de nuevo y si el problema persiste contacte al administrador de la aplicacion"),
 
-    TECHNICAL_ERROR_SQL_CONNECTION_IS_CLOSED(
-            "Error técnico: conexión SQL cerrada.",
-            "Se detectó que la conexión estaba cerrada durante la validación."),
+    TECHNICAL_ERROR_SQL_CONNECTION_IS_CLOSED("Conexion contra la fuente de informacion deseada cerrada",
+            "La conexion requerida para llevar a cabo la operacion contra la base de datos llegó cerrada."
+                    + "Por favor intenta de nuevo y si el problema persiste, contacte al administrador de la aplicación"),
 
-    USER_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS(
-            "Ocurrió un error inesperado al validar el estado de la conexión.",
-            "SQLException lanzada al ejecutar connection.isClosed()."),
+    USER_ERROR_SQL_CONNECTION_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS("Problema inesperado contra la fuente de informacion deseada vacia",
+            "La conexion requerida para llevar a cabo la operacion contra la fuente de informacion deseada está vacia. "
+                    + "Por favor intente de nuevo y si el problema persiste contacte al administrador de la aplicacion"),
 
-    TECHNICAL_ERROR_SQL_CONNECTION_IS_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS(
-            "Error SQL inesperado al validar conexión.",
-            "SQLException inesperado durante la validación de la conexión."),
+    TECHNICAL_ERROR_SQL_CONNECTION_SQL_EXCEPTION_VALIDATING_CONNECTION_STATUS("Problema inesperado contra la fuente de informacion deseada vacia" ,
+            "La conexion requerida para llevar a cabo la operacion contra la fuente de informacion deseada está vacia."
+                    + "Por favor intenta de nuevo y si el problema persiste, contacte al administrador de la aplicación"),
 
-    USER_ERROR_CONNECTION_OPEN_FAILED(
-            "No fue posible abrir la conexión a la base de datos.",
-            "Error al intentar establecer conexión con la base de datos."),
+    TECHNICAL_ERROR_SQL_CONNECTION_UNEXPECTED_ERROR_VALIDATING_CONNECTION_STATUS("Error técnico inesperado al validar el estado de la conexión",
+            "Se presentó un error técnico inesperado al intentar validar el estado de la conexión contra la base de datos. "
+                    + "Por favor intente nuevamente y si el problema persiste, contacte al administrador de la aplicación"),
 
-    TECHNICAL_ERROR_CONNECTION_OPEN_FAILED(
-            "Fallo técnico al abrir conexión SQL.",
-            "DriverManager.getConnection lanzó una SQLException."),
+    USER_ERROR_TRANSACTION_IS_STARTED("Transacción no iniciada",
+            "La operación no puede completarse porque la transacción requerida no ha sido iniciada. "
+                    + "Por favor inicie la transacción e intente nuevamente. Si el problema persiste, contacte al administrador de la aplicación."),
 
-    USER_ERROR_CONNECTION_CLOSE_FAILED(
-            "No fue posible cerrar la conexión a la base de datos.",
-            "Error al intentar cerrar la conexión SQL."),
+    TECHNICAL_ERROR_TRANSACTION_IS_STARTED("Transacción no iniciada en la base de datos",
+            "La operación no puede completarse porque la transacción requerida no fue iniciada correctamente en la base de datos. "
+                    + "Por favor revise la lógica de inicio de transacciones y si el problema persiste, contacte al administrador de la aplicación."),
 
-    TECHNICAL_ERROR_CONNECTION_CLOSE_FAILED(
-            "Fallo técnico al cerrar la conexión SQL.",
-            "SQLException al ejecutar connection.close()."),
+    USER_ERROR_SQL_CONNECTION_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_IS_STARTED("Error inesperado al validar el inicio de la transacción",
+            "Se presentó un problema inesperado al validar el estado de la transacción. "
+                    + "Por favor intente nuevamente y si el problema persiste, contacte al administrador de la aplicación."),
 
+    TECHNICAL_ERROR_SQL_CONNECTION_SQL_EXCEPTION_VALIDATING_TRANSACTION_IS_STARTED("Error SQL al validar el inicio de la transacción",
+            "Se produjo una excepción SQL al intentar validar el estado de la transacción. "
+                    + "Por favor revise la conexión con la base de datos y si el problema persiste, contacte al administrador de la aplicación."),
 
-    USER_ERROR_TRANSACTION_NOT_INITIATED(
-            "Transacción no iniciada.",
-            "Intentó realizar una operación sin haber iniciado la transacción."),
+    TECHNICAL_ERROR_SQL_CONNECTION_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_IS_STARTED("Error técnico inesperado al validar el inicio de la transacción",
+            "Se presentó un error técnico inesperado al intentar validar el estado de la transacción. "
+                    + "Por favor revise los registros del sistema y si el problema persiste, contacte al administrador de la aplicación."),
 
-    TECHNICAL_ERROR_TRANSACTION_NOT_INITIATED(
-            "Error técnico: transacción SQL no iniciada.",
-            "AutoCommit está activo. Debe desactivarse antes de operar con transacciones."),
+    TECHNICAL_ERROR_SQL_CONNECTION_SQL_EXCEPTION_VALIDATING_TRANSACTION_IS_NOT_STARTED(
+            "Error SQL al validar que la transacción no esté iniciada",
+            "Se produjo una excepción SQL al intentar verificar que la conexión no tenga una transacción activa. "
+                    + "Por favor revise la conexión con la base de datos y si el problema persiste, contacte al administrador de la aplicación."),
 
-    USER_ERROR_TRANSACTION_ALREADY_INITIATED(
-            "Transacción ya iniciada.",
-            "Se intentó iniciar una nueva transacción cuando ya existía una activa."),
+    USER_ERROR_SQL_CONNECTION_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_IS_NOT_STARTED(
+            "Ocurrió un error inesperado al validar el estado de la transacción.",
+            "Se presentó un error técnico no controlado al intentar verificar si la transacción está iniciada o no. "
+                    + "Por favor intente nuevamente y, si el problema continúa, comuníquese con soporte."),
 
-    TECHNICAL_ERROR_TRANSACTION_ALREADY_INITIATED(
-            "Error técnico: transacción SQL ya iniciada.",
-            "El modo autoCommit ya está desactivado. No puede iniciarse otra transacción."),
+    USER_ERROR_TRANSACTION_IS_NOT_STARTED(
+            "No hay una transacción iniciada.",
+            "Intentó realizar una operación sobre la base de datos sin haber iniciado una transacción."),
 
-    USER_ERROR_TRANSACTION_INIT_FAILED(
-            "Fallo al iniciar la transacción.",
-            "No se pudo desactivar el autoCommit de la conexión."),
+    TECHNICAL_ERROR_TRANSACTION_IS_NOT_STARTED(
+            "Error técnico: transacción no iniciada.",
+            "Se intentó ejecutar una operación que requiere una transacción activa, pero el modo autoCommit sigue habilitado.");
 
-    TECHNICAL_ERROR_TRANSACTION_INIT_FAILED(
-            "Error SQL iniciando transacción.",
-            "SQLException lanzada al ejecutar connection.setAutoCommit(false)."),
-
-    USER_ERROR_TRANSACTION_COMMIT_FAILED(
-            "Fallo al confirmar la transacción.",
-            "No se pudo realizar el commit de los cambios en la base de datos."),
-
-    TECHNICAL_ERROR_TRANSACTION_COMMIT_FAILED(
-            "Error SQL confirmando transacción.",
-            "SQLException lanzada al ejecutar connection.commit()."),
-
-    USER_ERROR_TRANSACTION_ROLLBACK_FAILED(
-            "Fallo al revertir la transacción.",
-            "No se pudo revertir los cambios de la base de datos."),
-
-    TECHNICAL_ERROR_TRANSACTION_ROLLBACK_FAILED(
-            "Error SQL revirtiendo transacción.",
-            "SQLException lanzada al ejecutar connection.rollback()."),
-
-
-    USER_ERROR_SQL_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_STATUS(
-            "Error inesperado al validar el estado de la transacción.",
-            "Ocurrió un error desconocido mientras se comprobaba el estado de la conexión."),
-
-    TECHNICAL_ERROR_SQL_UNEXPECTED_ERROR_VALIDATING_TRANSACTION_STATUS(
-            "Error SQL validando estado de transacción.",
-            "SQLException inesperado al validar autoCommit o estado de conexión.");
 
     private final String userMessage;
     private final String technicalMessage;

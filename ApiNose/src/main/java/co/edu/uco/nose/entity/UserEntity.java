@@ -1,72 +1,64 @@
+
 package co.edu.uco.nose.entity;
 
 import java.util.UUID;
 
-public final class UserEntity {
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
-    private UUID id;
-    private IdTypeEntity idType;
-    private String identificationNumber;
+public class UserEntity extends Entity {
+
     private String firstName;
     private String secondName;
     private String firstLastName;
     private String secondLastName;
+    private String identification;
     private CityEntity residenceCity;
+    private IdTypeEntity idType;
     private String email;
-    private String mobileNumber;
+    private String phoneNumber;
     private boolean emailConfirmed;
     private boolean mobileNumberConfirmed;
 
     public UserEntity() {
+        super(UUIDHelper.getUUIDHelper().getDefault());
+        setFirstName(TextHelper.getDefault());
+        setSecondName(TextHelper.getDefault());
+        setFirstLastName(TextHelper.getDefault());
+        setSecondLastName(TextHelper.getDefault());
+        setIdentification(TextHelper.getDefault());
+        setResidenceCity(new CityEntity());
+        setIdType(new IdTypeEntity());
+        setEmail(TextHelper.getDefault());
+        setPhoneNumber(TextHelper.getDefault());
+        setEmailConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
-    public UserEntity(final UUID id, final IdTypeEntity idType, final String identificationNumber, final String firstName,
-                      final String middleName, final String firstLastName, final String secondLastName,
-                      final CityEntity residenceCity, final String email, final String mobileNumber,
-                      final boolean emailConfirmed, final boolean mobileNumberConfirmed) {
-        this.id = id;
-        this.idType = idType;
-        this.identificationNumber = identificationNumber;
-        this.firstName = firstName;
-        this.secondName = middleName;
-        this.firstLastName = firstLastName;
-        this.secondLastName = secondLastName;
-        this.residenceCity = residenceCity;
-        this.email = email;
-        this.mobileNumber = mobileNumber;
-        this.emailConfirmed = emailConfirmed;
-        this.mobileNumberConfirmed = mobileNumberConfirmed;
+    public UserEntity(final UUID id) {
+        super(id);
+        setFirstName(TextHelper.getDefault());
+        setSecondName(TextHelper.getDefault());
+        setFirstLastName(TextHelper.getDefault());
+        setSecondLastName(TextHelper.getDefault());
+        setIdentification(TextHelper.getDefault());
+        setResidenceCity(new CityEntity());
+        setIdType(new IdTypeEntity());
+        setEmail(TextHelper.getDefault());
+        setPhoneNumber(TextHelper.getDefault());
+        setEmailConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(final UUID id) {
-        this.id = id;
-    }
-
-    public IdTypeEntity getIdType() {
-        return idType;
-    }
-
-    public void setIdType(final IdTypeEntity idType) {
-        this.idType = idType;
-    }
-
-    public String getIdentificationNumber() {
-        return identificationNumber;
-    }
-
-    public void setIdentificationNumber(final String identificationNumber) {
-        this.identificationNumber = identificationNumber;
+    public static final UserEntity build() {
+        return new UserEntity();
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(final String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -74,7 +66,7 @@ public final class UserEntity {
         return secondName;
     }
 
-    public void setSecondName(final String secondName) {
+    public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
 
@@ -82,7 +74,7 @@ public final class UserEntity {
         return firstLastName;
     }
 
-    public void setFirstLastName(final String firstLastName) {
+    public void setFirstLastName(String firstLastName) {
         this.firstLastName = firstLastName;
     }
 
@@ -90,39 +82,56 @@ public final class UserEntity {
         return secondLastName;
     }
 
-    public void setSecondLastName(final String secondLastName) {
+    public void setSecondLastName(String secondLastName) {
         this.secondLastName = secondLastName;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
     public CityEntity getResidenceCity() {
         return residenceCity;
     }
 
-    public void setResidenceCity(final CityEntity residenceCity) {
+    public void setResidenceCity(CityEntity residenceCity) {
         this.residenceCity = residenceCity;
+    }
+
+    public IdTypeEntity getIdType() {
+        return idType;
+    }
+
+    public void setIdType(IdTypeEntity idType) {
+        this.idType = idType;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(final String email) {
+    public void setEmail(String email) {
         this.email = email;
+        setEmailConfirmed(false);
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setMobileNumber(final String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isEmailConfirmed() {
         return emailConfirmed;
     }
 
-    public void setEmailConfirmed(final boolean emailConfirmed) {
+    public void setEmailConfirmed(boolean emailConfirmed) {
         this.emailConfirmed = emailConfirmed;
     }
 
@@ -130,7 +139,7 @@ public final class UserEntity {
         return mobileNumberConfirmed;
     }
 
-    public void setMobileNumberConfirmed(final boolean mobileNumberConfirmed) {
+    public void setMobileNumberConfirmed(boolean mobileNumberConfirmed) {
         this.mobileNumberConfirmed = mobileNumberConfirmed;
     }
 }

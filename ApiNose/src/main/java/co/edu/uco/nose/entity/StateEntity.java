@@ -2,35 +2,28 @@ package co.edu.uco.nose.entity;
 
 import java.util.UUID;
 
-public final class StateEntity {
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
-    private UUID id;
-    private CountryEntity country;
+public class StateEntity extends Entity{
+
+
     private String name;
 
     public StateEntity() {
+        super(UUIDHelper.getUUIDHelper().getDefault());
+        setName(TextHelper.getDefault());
     }
 
-    public StateEntity(final UUID id, final CountryEntity country, final String name) {
-        this.id = id;
-        this.country = country;
+
+    public StateEntity(final UUID id) {
+        super(id);
+        setName(TextHelper.getDefault());
+    }
+
+    public StateEntity(final UUID id,final String name) {
+        super(id);
         this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(final UUID id) {
-        this.id = id;
-    }
-
-    public CountryEntity getCountry() {
-        return country;
-    }
-
-    public void setCountry(final CountryEntity country) {
-        this.country = country;
     }
 
     public String getName() {
@@ -38,6 +31,7 @@ public final class StateEntity {
     }
 
     public void setName(final String name) {
-        this.name = name;
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
+
 }

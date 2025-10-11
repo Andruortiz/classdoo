@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public final class IdTypeSqlServerDAO extends SqlConnection implements IdTypeDAO {
 
-    IdTypeSqlServerDAO(final Connection connection) {
+    public IdTypeSqlServerDAO(final Connection connection) {
         super(connection);
     }
 

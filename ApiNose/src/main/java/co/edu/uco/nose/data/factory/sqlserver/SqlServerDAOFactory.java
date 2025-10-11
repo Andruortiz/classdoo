@@ -1,10 +1,12 @@
 package co.edu.uco.nose.data.factory.sqlserver;
 
-import co.edu.uco.nose.data.dao.UserDAO;
+import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.data.dao.entity.CityDAO;
 import co.edu.uco.nose.data.dao.entity.CountryDAO;
 import co.edu.uco.nose.data.dao.entity.IdTypeDAO;
 import co.edu.uco.nose.data.dao.entity.StateDAO;
+import co.edu.uco.nose.data.dao.entity.UserDAO;
+import co.edu.uco.nose.data.dao.entity.SqlConnection.*;
 import co.edu.uco.nose.data.dao.entity.sqlserver.*;
 import co.edu.uco.nose.data.factory.DAOFactory;
 
@@ -42,6 +44,7 @@ public final class SqlServerDAOFactory extends DAOFactory {
 
     @Override
     public CountryDAO getCountryDAO() {
+
         return new CountrySqlServerDAO(connection);
     }
 
@@ -53,11 +56,13 @@ public final class SqlServerDAOFactory extends DAOFactory {
 
     @Override
     public IdTypeDAO getIdTypeDAO() {
+
         return new IdTypeSqlServerDAO(connection);
     }
 
     @Override
     public StateDAO getStateDAO() {
+
         return new StateSqlServerDAO(connection);
     }
 

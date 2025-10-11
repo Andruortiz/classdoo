@@ -2,42 +2,29 @@ package co.edu.uco.nose.entity;
 
 import java.util.UUID;
 
-public final class CityEntity {
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
-    private UUID id;
-    private StateEntity state;
+public class CityEntity extends Entity {
+
     private String name;
 
     public CityEntity() {
+        super(UUIDHelper.getUUIDHelper().getDefault());
+        setName(TextHelper.getDefault());
     }
 
-    public CityEntity(final UUID id, final StateEntity state, final String name) {
-        this.id = id;
-        this.state = state;
+    public CityEntity(final UUID id) {
+        super(id);
+        setName(TextHelper.getDefault());
+    }
+
+    public CityEntity(final UUID id, final String name) {
+        super(id);
         this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(final UUID id) {
-        this.id = id;
-    }
-
-    public StateEntity getState() {
-        return state;
-    }
-
-    public void setState(final StateEntity state) {
-        this.state = state;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(final String name) {
-        this.name = name;
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 }
