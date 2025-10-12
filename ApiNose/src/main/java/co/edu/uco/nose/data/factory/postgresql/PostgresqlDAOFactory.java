@@ -1,23 +1,21 @@
-package co.edu.uco.nose.data.factory.sqlserver;
+package co.edu.uco.nose.data.factory.postgresql;
 
-import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.data.dao.entity.CityDAO;
 import co.edu.uco.nose.data.dao.entity.CountryDAO;
 import co.edu.uco.nose.data.dao.entity.IdTypeDAO;
 import co.edu.uco.nose.data.dao.entity.StateDAO;
 import co.edu.uco.nose.data.dao.entity.UserDAO;
-import co.edu.uco.nose.data.dao.entity.SqlConnection.*;
-import co.edu.uco.nose.data.dao.entity.sqlserver.*;
+import co.edu.uco.nose.data.dao.entity.postgresql.*;
 import co.edu.uco.nose.data.factory.DAOFactory;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class SqlServerDAOFactory extends DAOFactory {
+public final class PostgresqlDAOFactory extends DAOFactory {
 
 
 
-    public SqlServerDAOFactory() {
+    public PostgresqlDAOFactory() {
         openConnection();
     }
 
@@ -45,30 +43,30 @@ public final class SqlServerDAOFactory extends DAOFactory {
     @Override
     public CountryDAO getCountryDAO() {
 
-        return new CountrySqlServerDAO(connection);
+        return new CountryPostgreSqlDAO(connection);
     }
 
     @Override
     public CityDAO getCityDAO() {
 
-        return new CitySqlServerDAO(connection);
+        return new CityPostgreSqlDAO(connection);
     }
 
     @Override
     public IdTypeDAO getIdTypeDAO() {
 
-        return new IdTypeSqlServerDAO(connection);
+        return new IdTypePostgreSqlDAO(connection);
     }
 
     @Override
     public StateDAO getStateDAO() {
 
-        return new StateSqlServerDAO(connection);
+        return new StatePostgreSqlDAO(connection);
     }
 
     @Override
     public UserDAO getUserDAO() {
-        return new UserSqlServerDAO(connection);
+        return new UserPostgreSqlDAO(connection);
     }
 
 
