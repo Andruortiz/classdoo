@@ -20,3 +20,6 @@ public final class TextHelper {
 		return getDefault(value).trim();
 	}
 }
+
+
+

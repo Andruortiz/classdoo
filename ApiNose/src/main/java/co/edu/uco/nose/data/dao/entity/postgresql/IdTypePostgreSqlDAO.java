@@ -1,5 +1,6 @@
 package co.edu.uco.nose.data.dao.entity.postgresql;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +16,10 @@ import co.edu.uco.nose.data.dao.entity.IdTypeDAO;
 import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.entity.IdTypeEntity;
 
-public final class IdTypePostgresqlDAO extends SqlConnection implements IdTypeDAO {
+public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDAO {
 
-    public IdTypePostgresqlDAO(final Connection connection) {
+
+    public IdTypePostgreSqlDAO(final Connection connection) {
         super(connection);
     }
 
@@ -179,6 +181,5 @@ public final class IdTypePostgresqlDAO extends SqlConnection implements IdTypeDA
             );
         }
     }
-}
 
-IdTypePostgresqlDAO
+}

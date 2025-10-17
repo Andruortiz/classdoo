@@ -135,7 +135,7 @@ public class UserEntity extends Entity {
         this.emailConfirmed = emailConfirmed;
     }
 
-    public boolean isMobileNumberConfirmed() {
+    public boolean isPhoneNumberConfirmed() {
         return mobileNumberConfirmed;
     }
 

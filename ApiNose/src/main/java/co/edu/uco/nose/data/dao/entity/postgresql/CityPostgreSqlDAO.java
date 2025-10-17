@@ -17,9 +17,9 @@ import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.entity.CityEntity;
 import co.edu.uco.nose.entity.StateEntity;
 
-public final class CityPostgresqlDAO extends SqlConnection implements CityDAO {
+public final class CityPostgreSqlDAO extends SqlConnection implements CityDAO{
 
-    public CityPostgresqlDAO(final Connection connection) {
+    public CityPostgreSqlDAO(final Connection connection) {
         super(connection);
     }
 
@@ -191,7 +191,5 @@ public final class CityPostgresqlDAO extends SqlConnection implements CityDAO {
             );
         }
     }
+
 }
-
-
-CityPostgresqlDAO
