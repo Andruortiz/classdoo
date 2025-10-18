@@ -47,7 +47,7 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO{
 
         } catch (final SQLException exception) {
             throw new NoseException(
-                    MessageEnum.USER_ERROR_SQL_CREATE.getContent(),
+                    MessagesEnum.USER_ERROR_SQL_CREATE.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_SQL_CREATE.getContent(),
                     (SQLException) exception
             );

@@ -44,7 +44,7 @@
         /**
          * Inicia una transacción (desactiva auto-commit).
          */
-        protected final void initTransaction() {
+        public final void initTransaction() {
             SqlConnectionHelper.ensureConnectionIsOpen(connection);
 
             try {
@@ -59,7 +59,7 @@
         /**
          * Confirma (commit) la transacción actual.
          */
-        protected final void commitTransaction() {
+        public final void commitTransaction() {
             SqlConnectionHelper.ensureTransactionIsStarted(connection);
 
             try {
@@ -74,7 +74,7 @@
         /**
          * Revierte (rollback) la transacción actual.
          */
-        protected final void rollbackTransaction() {
+        public final void rollbackTransaction() {
             SqlConnectionHelper.ensureTransactionIsStarted(connection);
 
             try {
@@ -89,7 +89,7 @@
         /**
          * Cierra la conexión activa.
          */
-        protected final void closeConnection() {
+        public final void closeConnection() {
             SqlConnectionHelper.ensureConnectionIsOpen(connection);
 
             try {
