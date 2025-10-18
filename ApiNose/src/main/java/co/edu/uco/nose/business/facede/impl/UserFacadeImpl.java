@@ -21,7 +21,7 @@ public final class UserFacadeImpl implements UserFacade {
         try{
             daoFactory.initTransaction();
 
-            var domain = UserDTOAssembler.getUserDTOAssembler().toDomain(userDTO)
+            var domain = UserDTOAssembler.getUserDTOAssembler().toDomain(userDTO);
             business.registerNewUserInformation(domain);
 
             daoFactory.commitTransaction();
@@ -30,8 +30,7 @@ public final class UserFacadeImpl implements UserFacade {
             daoFactory.rollbackTransaction();
             throw exception;
             }
-
-        }catch (final Exception exception){
+        catch (final Exception exception){
             daoFactory.rollbackTransaction();
 
             var userMessage = "";

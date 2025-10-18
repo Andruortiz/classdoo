@@ -21,6 +21,12 @@ public final class StateDomain extends Domain {
         setName(name);
     }
 
+    public StateDomain(final UUID id) {
+        super(UUIDHelper.getUUIDHelper().getDefault(id));
+        setName(TextHelper.getDefault());
+        setCountry(new CountryDomain());
+    }
+
     public String getName() {
         return name;
     }

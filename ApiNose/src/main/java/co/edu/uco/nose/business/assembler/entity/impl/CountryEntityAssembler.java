@@ -10,13 +10,18 @@ public final  class CountryEntityAssembler implements EntityAssembler<CountryEnt
 
     @Override
     public CountryEntity toDTO(final CountryDomain domain) {
-        var domainTmp = ObjectHelper.getDefault(domain, new CountryDomain(UUIDHelper.getUUIDHelper()))
+        var domainTmp = ObjectHelper.getDefault(domain, new CountryDomain(UUIDHelper.getUUIDHelper()));
         return new CountryEntity(domainTmp.getId(), domainTmp.getName());
     }
 
     @Override
+    public CountryDomain toDomain(CountryEntity entity) {
+        return null;
+    }
+
+    @Override
     public CountryDomain TODomain(final CountryEntity Entity) {
-        var dtoTmp = ObjectHelper.getDefault(Entity, new CountryEntity())
+        var dtoTmp = ObjectHelper.getDefault(Entity, new CountryEntity());
         return new CountryEntity(dtoTmp.getId(), dtoTmp.getName());
     }
 

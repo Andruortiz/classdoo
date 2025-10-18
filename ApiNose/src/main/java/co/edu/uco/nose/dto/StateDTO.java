@@ -1,27 +1,29 @@
 package co.edu.uco.nose.dto;
 
-public class CItyDTO {
+import java.util.UUID;
+
+public class StateDTO {
 
     private UUID id;
     private String name;
-    private StateDTO state;
+    private CountryDTO country;
 
-    public CityDTO() {
+    public StateDTO() {
         super();
         this.id = UUID.randomUUID();
         this.name = "";
-        this.state = new StateDTO();
+        this.country = new CountryDTO();
     }
 
-    public CityDTO(UUID id, String name, StateDTO state) {
+    public StateDTO(UUID id, String name, CountryDTO country) {
         super();
         this.id = id;
         this.name = name;
-        this.state = state;
+        this.country = country;
     }
 
-    public static CityDTO build() {
-        return new CityDTO();
+    public static StateDTO build() {
+        return new StateDTO();
     }
 
     public UUID getId() {
@@ -40,11 +42,12 @@ public class CItyDTO {
         this.name = name;
     }
 
-    public StateDTO getState() {
-        return state;
+    public CountryDTO getCountry() {
+        return country;
     }
 
-    public void setState(StateDTO state) {
-        this.state = state;
+    public void setCountry(CountryDTO country) {
+        this.country = country;
     }
+
 }
