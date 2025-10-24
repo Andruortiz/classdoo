@@ -414,7 +414,7 @@ public enum MessagesEnum {
     VALIDATION_PHONE_INVALID("Número de teléfono inválido", "El número de teléfono debe tener 10 dígitos"),
     VALIDATION_ID_DUPLICATED("ID duplicado", "Ya existe un usuario con ese tipo y número de identificación"),
     VALIDATION_EMAIL_DUPLICATED("Email duplicado", "Ya existe un usuario con ese correo electrónico"),
-    VALIDATION_PHONE_DUPLICATED("Número de teléfono duplicado", "Ya existe un usuario con ese número de teléfono"),
+    VALIDATION_PHONE_DUPLICATED("Número de teléfono duplicado", "Ya existe un usuario con ese número de teléfono");
 
 
 
