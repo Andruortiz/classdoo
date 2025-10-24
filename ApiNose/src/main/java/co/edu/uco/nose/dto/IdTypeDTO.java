@@ -7,20 +7,17 @@ public class IdTypeDTO {
 
     private UUID id;
     private String name;
-    private String description;
 
     public IdTypeDTO() {
         super();
         this.id = UUID.randomUUID();
         this.name = "";
-        this.description = "";
     }
 
     public IdTypeDTO(UUID id, String name, String description) {
         super();
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public static IdTypeDTO build() {
@@ -43,11 +40,5 @@ public class IdTypeDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

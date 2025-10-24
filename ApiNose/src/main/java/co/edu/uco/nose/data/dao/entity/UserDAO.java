@@ -7,5 +7,7 @@ import java.util.UUID;
 
 public interface UserDAO extends RetrieveDAO<UserEntity, UUID> {
 
-    void create(Object userEntity);
+    void create(UserEntity user);
+    void update(UserEntity user);
+    void delete(UUID id);
 }

@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface CityDAO extends RetrieveDAO <CityEntity, UUID> {
 
+
+
 }
