@@ -35,7 +35,7 @@ public final class UserFacadeImpl implements UserFacade {
 
             var userMessage = "";
             var technicalMessage = "";
-            throw NoseException.create(exception, userMessage, technicalMessage);
+            throw NoseException.create( userMessage, technicalMessage, exception);
 
         } finally {
             daoFactory.closeConnection();

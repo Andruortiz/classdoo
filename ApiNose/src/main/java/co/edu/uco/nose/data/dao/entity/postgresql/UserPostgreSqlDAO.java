@@ -143,18 +143,14 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
                 while (resultSet.next()) {
                     final UserEntity user = new UserEntity();
                     user.setId((UUID) resultSet.getObject("id"));
-                    // Se usan setters para evitar dependencias de constructores no existentes
-                    // Si faltan columnas/sets, completar según la entidad real
-                    // Ejemplos comunes:
-                    // user.setFirstName(resultSet.getString("firstname"));
-                    // user.setSecondName(resultSet.getString("secondname"));
-                    // user.setFirstLastName(resultSet.getString("firstlastname"));
-                    // user.setSecondLastName(resultSet.getString("secondlastname"));
-                    // user.setEmail(resultSet.getString("email"));
-                    // user.setPhoneNumber(resultSet.getString("phone"));
-                    // user.setPassword(resultSet.getString("password"));
-                    // user.setEmailConfirmed(resultSet.getBoolean("emailconfirmation"));
-                    // user.setPhoneNumberConfirmed(resultSet.getBoolean("phoneconfirmation"));
+                    user.setFirstName(resultSet.getString("firstname"));
+                    user.setSecondName(resultSet.getString("secondname"));
+                    user.setFirstLastName(resultSet.getString("firstlastname"));
+                    user.setSecondLastName(resultSet.getString("secondlastname"));
+                    user.setEmail(resultSet.getString("email"));
+                    user.setPhoneNumber(resultSet.getString("phone"));
+                    user.setEmailConfirmed(resultSet.getBoolean("emailconfirmation"));
+                    user.setMobileNumberConfirmed(resultSet.getBoolean("phoneconfirmation"));
                     users.add(user);
                 }
                 return users;
