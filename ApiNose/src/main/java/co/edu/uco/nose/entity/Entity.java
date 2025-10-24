@@ -8,6 +8,7 @@ public class Entity {
     private UUID id;
 
     protected Entity(final UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
 
     }
 

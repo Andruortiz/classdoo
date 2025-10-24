@@ -9,11 +9,14 @@ public class StateEntity extends Entity{
 
 
     private String name;
+    private CountryEntity country;
 
     public StateEntity() {
         super(UUIDHelper.getUUIDHelper().getDefault());
         setName(TextHelper.getDefault());
+        setCountry(new CountryEntity());
     }
+
 
 
     public StateEntity(final UUID id) {
@@ -24,6 +27,13 @@ public class StateEntity extends Entity{
     public StateEntity(final UUID id,final String name) {
         super(id);
         this.name = name;
+        setCountry(new CountryEntity());
+    }
+
+    public StateEntity(final UUID id, final String name, final CountryEntity country) {
+        super(id);
+        setName(name);
+        setCountry(country);
     }
 
     public String getName() {
@@ -32,6 +42,14 @@ public class StateEntity extends Entity{
 
     public void setName(final String name) {
         this.name = TextHelper.getDefaultWithTrim(name);
+    }
+
+    public CountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(final CountryEntity country) {
+        this.country = (country == null) ? new CountryEntity() : country;
     }
 
 }

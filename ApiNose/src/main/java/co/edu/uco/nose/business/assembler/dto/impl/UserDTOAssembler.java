@@ -15,29 +15,25 @@ public final class UserDTOAssembler implements DTOAssembler<UserDTO, UserDomain>
 
 
 
-    private static final DTOAssembler<CountryDTO, CountryDomain> instance =
+    private static final DTOAssembler<UserDTO, UserDomain> instance =
             new UserDTOAssembler();
 
     private UserDTOAssembler(){
-
-
     }
 
     public static DTOAssembler<UserDTO, UserDomain> getUserDTOAssembler(){
-        return instance
-    }
+        return instance;}
 
     @Override
     public UserDTO toDTO(UserDomain domain) {
-        var domainTmp = ObjectHelper.getDefault(domain, new UserDomain(UUIDHelper.getUUIDHelper()))
-        return new UserDTO(domainTmp.getId(), domainTmp.getName());
+        var domainTmp = ObjectHelper.getDefault(domain, new UserDomain());
+        return new UserDTO(domainTmp.getId(), domainTmp.getFirstName());
 
-        return null;
     }
 
     @Override
     public UserDomain toDomain(UserDTO dto) {
-        var dtoTmp = ObjectHelper.getDefault(dto, new UserDTO())
+        var dtoTmp = ObjectHelper.getDefault(dto, new UserDTO());
         return new UserDomain(dtoTmp.getId(),
                 dtoTmp.getFirstName(),
                 dtoTmp.getEmail());
@@ -49,7 +45,7 @@ public final class UserDTOAssembler implements DTOAssembler<UserDTO, UserDomain>
 
         var userDtoList = new ArrayList<UserDTO>();
         for (var userDomain: domaindList){
-            userDtoList.add(toDTO(userDomain))
+            userDtoList.add(toDTO(userDomain));
         }
         return userDtoList;
     }

@@ -21,7 +21,7 @@ public final  class UserBusinessImpl implements UserBusiness {
     @Override
     public void registerNewUserInformation(UserDomain userDomain) {
 
-        var id = UUIDHelper.getUUIDHelper().genereteNewUUID();
+        var id = UUIDHelper.getUUIDHelper().generateNewUUID();
         var userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
 
         userEntity.setId(id);

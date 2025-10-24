@@ -50,6 +50,11 @@ public class UserDTO {
         this.mobileNumberConfirmed = mobileNumberConfirmed;
     }
 
+    public UserDTO(UUID id, String firstName) {
+        this.id = id;
+        this.firstName = firstName;
+    }
+
     public static UserDTO build() {
         return new UserDTO();
     }

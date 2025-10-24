@@ -33,7 +33,7 @@ public final class UUIDHelper {
 		}
 	}
 
-    public UUID genereteNewUUID(){
+    public UUID generateNewUUID(){
         return UUID.randomUUID();
     }
 }

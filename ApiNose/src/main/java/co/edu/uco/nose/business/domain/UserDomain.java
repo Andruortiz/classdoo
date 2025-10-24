@@ -53,6 +53,28 @@ public final class UserDomain extends Domain {
         setMobileConfirmed(mobileConfirmed);
     }
 
+    public UserDomain(final UUID id) {
+        super(UUIDHelper.getUUIDHelper().getDefault(id));
+        setIdType(new IdTypeDomain());
+        setIdentificationNumber(TextHelper.getDefault());
+        setFirstName(TextHelper.getDefault());
+        setMiddleName(TextHelper.getDefault());
+        setFirstLastName(TextHelper.getDefault());
+        setSecondLastName(TextHelper.getDefault());
+        setCityOfResidence(new CityDomain());
+        setEmail(TextHelper.getDefault());
+        setMobileNumber(TextHelper.getDefault());
+        setEmailConfirmed(false);
+        setMobileConfirmed(false);
+    }
+
+    public UserDomain(UUID id, String firstName, String email) {
+        super(UUIDHelper.getUUIDHelper().getDefault(id));
+        setFirstName(firstName);
+        setEmail(email);
+    }
+
+
     public IdTypeDomain getIdType() {
         return idType;
     }

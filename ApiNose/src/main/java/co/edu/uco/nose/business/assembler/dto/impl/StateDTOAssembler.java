@@ -1,7 +1,6 @@
 package co.edu.uco.nose.business.assembler.dto.impl;
 
 
-import static co.edu.uco.nose.business.assembler.dto.impl.CountryDTOAssembler.getCountryDTOAssembler;
 import co.edu.uco.nose.business.assembler.dto.DTOAssembler;
 import co.edu.uco.nose.business.domain.StateDomain;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;

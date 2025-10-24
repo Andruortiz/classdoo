@@ -372,4 +372,9 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO{
             );
         }
     }
+
+    @Override
+    public void create(Object userEntity) {
+
+    }
 }
