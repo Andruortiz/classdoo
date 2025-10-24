@@ -1,5 +1,5 @@
+// java
 package co.edu.uco.nose.data.dao.entity.postgresql;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,6 @@ import co.edu.uco.nose.entity.IdTypeEntity;
 
 public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDAO {
 
-
     public IdTypePostgreSqlDAO(final Connection connection) {
         super(connection);
     }
@@ -28,41 +27,37 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
         SqlConnectionHelper.ensureTransactionIsStarted(getConnection());
 
         final String sql = "SELECT id, name, abbreviation FROM idtype";
+        final List<IdTypeEntity> idTypes = new ArrayList<>();
 
-        try (final PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
-            final ResultSet resultSet = preparedStatement.executeQuery();
-
-            final List<IdTypeEntity> idTypes = new ArrayList<>();
+        try (final PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+             final ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
                 final IdTypeEntity entity = new IdTypeEntity(
                         (UUID) resultSet.getObject("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("abbreviation"));
+                        resultSet.getString("name")
+                );
                 idTypes.add(entity);
             }
-
             return idTypes;
 
         } catch (final SQLException exception) {
             throw NoseException.create(
-                    exception,
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_ID_TYPE.getContent()
+                    MessagesEnum.ID_TYPE_ERROR_FIND_ALL_SQL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_ID_TYPE.getContent(),
+                    exception
             );
-
         } catch (final Exception exception) {
             throw NoseException.create(
-                    exception,
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_ID_TYPE.getContent()
+                    MessagesEnum.ID_TYPE_ERROR_FIND_ALL_UNEXPECTED.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_ID_TYPE.getContent(),
+                    exception
             );
-
         } catch (final Throwable exception) {
             throw NoseException.create(
-                    exception,
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_ID_TYPE.getContent()
+                    MessagesEnum.ID_TYPE_ERROR_FIND_ALL_CRITICAL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_ID_TYPE.getContent(),
+                    exception
             );
         }
     }
@@ -87,7 +82,6 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
             whereClauses.add("name ILIKE ?");
         }
 
-
         if (!whereClauses.isEmpty()) {
             sql.append(" WHERE ");
             sql.append(String.join(" AND ", whereClauses));
@@ -109,36 +103,33 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
                 while (resultSet.next()) {
                     final IdTypeEntity entity = new IdTypeEntity(
                             (UUID) resultSet.getObject("id"),
-                            resultSet.getString("name"),
-                            resultSet.getString("abbreviation"));
+                            resultSet.getString("name")
+                    );
                     idTypes.add(entity);
                 }
                 return idTypes;
             }
 
         } catch (final SQLException exception) {
-            throw new NoseException(
+            throw NoseException.create(
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_SQL.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_ID_TYPE.getContent(),
                     exception
             );
-
         } catch (final Exception exception) {
-            throw new NoseException(
+            throw NoseException.create(
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_ID_TYPE.getContent(),
-                    (SQLException) exception
+                    exception
             );
-
         } catch (final Throwable exception) {
-            throw new NoseException(
+            throw NoseException.create(
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_ID_TYPE.getContent(),
-                    (SQLException) exception
+                    exception
             );
         }
     }
-
 
     @Override
     public IdTypeEntity findById(final UUID id) {
@@ -148,38 +139,34 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
 
         try (final PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
             preparedStatement.setObject(1, id);
-            final ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                return new IdTypeEntity(
-                        (UUID) resultSet.getObject("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("abbreviation"));
+            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new IdTypeEntity(
+                            (UUID) resultSet.getObject("id"),
+                            resultSet.getString("name")
+                    );
+                }
+                return null;
             }
 
-            return null;
-
         } catch (final SQLException exception) {
-            throw new NoseException(
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_ID_TYPE.getContent(),
-                    (SQLException) exception
+            throw NoseException.create(
+                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_SQL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_ID_TYPE.getContent(),
+                    exception
             );
-
         } catch (final Exception exception) {
-            throw new NoseException(
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_ID_TYPE.getContent(),
-                    (SQLException) exception
+            throw NoseException.create(
+                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_ID_TYPE.getContent(),
+                    exception
             );
-
         } catch (final Throwable exception) {
-            throw new NoseException(
-                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_ID_TYPE.getContent(),
-                    (SQLException) exception
+            throw NoseException.create(
+                    MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_CRITICAL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_ID_TYPE.getContent(),
+                    exception
             );
         }
     }
-
 }

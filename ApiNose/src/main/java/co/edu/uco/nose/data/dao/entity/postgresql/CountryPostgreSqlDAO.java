@@ -43,24 +43,24 @@ public final class CountryPostgreSqlDAO extends SqlConnection implements Country
                 }
 
             } catch (final SQLException exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_ALL_SQL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_COUNTRY.getContent(),
                         exception
                 );
 
             } catch (final Exception exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_ALL_UNEXPECTED.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
 
             } catch (final Throwable exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_ALL_CRITICAL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
             }
 
@@ -115,24 +115,25 @@ public final class CountryPostgreSqlDAO extends SqlConnection implements Country
                 }
 
             } catch (final SQLException exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_FILTER_SQL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_COUNTRY.getContent(),
                         exception
                 );
 
             } catch (final Exception exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
 
+
             } catch (final Throwable exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
             }
         }
@@ -160,25 +161,25 @@ public final class CountryPostgreSqlDAO extends SqlConnection implements Country
 
                 return null;
 
-            } catch (final SQLException exception) {
-                throw new NoseException(
+            }  catch (final SQLException exception) {
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_ID_SQL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
 
             } catch (final Exception exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
 
             } catch (final Throwable exception) {
-                throw new NoseException(
+                throw NoseException.create(
                         MessagesEnum.COUNTRY_ERROR_FIND_BY_ID_CRITICAL.getContent(),
                         MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_COUNTRY.getContent(),
-                        (SQLException) exception
+                        exception
                 );
             }
         }
