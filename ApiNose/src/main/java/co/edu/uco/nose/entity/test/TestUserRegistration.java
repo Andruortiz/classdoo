@@ -1,6 +1,7 @@
 package co.edu.uco.nose.entity.test;
 
 import co.edu.uco.nose.business.facede.UserFacade;
+import co.edu.uco.nose.business.facede.impl.UserFacadeImpl;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.dto.UserDTO;
 

@@ -409,8 +409,15 @@ public enum MessagesEnum {
             "Error técnico crítico al intentar consultar los estados según el filtro."),
 
 
+    VALIDATION_USER_NULL("Usuario nulo", "El usuario no puede ser nulo"),
+    VALIDATION_EMAIL_INVALID("Email inválido", "El email proporcionado no tiene un formato válido"),
+    VALIDATION_PHONE_INVALID("Número de teléfono inválido", "El número de teléfono debe tener 10 dígitos"),
+    VALIDATION_ID_DUPLICATED("ID duplicado", "Ya existe un usuario con ese tipo y número de identificación"),
+    VALIDATION_EMAIL_DUPLICATED("Email duplicado", "Ya existe un usuario con ese correo electrónico"),
+    VALIDATION_PHONE_DUPLICATED("Número de teléfono duplicado", "Ya existe un usuario con ese número de teléfono"),
 
-    ;
+
+
 
 
 
@@ -423,9 +430,6 @@ public enum MessagesEnum {
         this.content = content;
     }
 
-    public static String TECHNICAL_ERROR_FIND_BY_ID_CRITICAL() {
-        return null;
-    }
 
     public String getTitle() {
         return title;

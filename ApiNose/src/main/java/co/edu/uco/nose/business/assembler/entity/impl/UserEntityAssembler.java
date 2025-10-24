@@ -6,6 +6,9 @@ import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.entity.UserEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class UserEntityAssembler implements EntityAssembler<UserEntity, UserDomain> {
 
     private static final UserEntityAssembler INSTANCE = new UserEntityAssembler();
@@ -28,6 +31,16 @@ public final class UserEntityAssembler implements EntityAssembler<UserEntity, Us
         return new UserDomain( entityTmp.getId(),
                 entityTmp.getFirstName(),
                 entityTmp.getEmail());
+    }
+
+    public List<UserDomain> toDomainList(List<UserEntity> entities) {
+        List<UserDomain> list = new ArrayList<>();
+        if (entities != null) {
+            for (UserEntity entity : entities) {
+                list.add(toDomain(entity));
+            }
+        }
+        return list;
     }
 }
 
