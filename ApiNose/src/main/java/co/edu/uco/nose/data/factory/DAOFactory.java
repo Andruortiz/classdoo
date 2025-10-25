@@ -52,7 +52,7 @@
             } catch (final SQLException exception) {
                 var userMessage = "No fue posible iniciar la transacción.";
                 var technicalMessage = "Error SQL al desactivar el auto-commit.";
-                throw NoseException.create(exception, userMessage, technicalMessage);
+                throw NoseException.create(userMessage, technicalMessage, exception);
             }
         }
 
@@ -67,7 +67,7 @@
             } catch (final SQLException exception) {
                 var userMessage = "No fue posible confirmar los cambios.";
                 var technicalMessage = "Error SQL al realizar commit.";
-                throw NoseException.create(exception, userMessage, technicalMessage);
+                throw NoseException.create( userMessage, technicalMessage, exception);
             }
         }
 
@@ -82,7 +82,7 @@
             } catch (final SQLException exception) {
                 var userMessage = "No fue posible revertir los cambios.";
                 var technicalMessage = "Error SQL al realizar rollback.";
-                throw NoseException.create(exception, userMessage, technicalMessage);
+                throw NoseException.create(userMessage, technicalMessage, exception);
             }
         }
 
@@ -97,7 +97,7 @@
             } catch (final SQLException exception) {
                 var userMessage = "No fue posible cerrar la conexión.";
                 var technicalMessage = "Error SQL al cerrar la conexión.";
-                throw NoseException.create(exception, userMessage, technicalMessage);
+                throw NoseException.create(userMessage, technicalMessage, exception);
             }
         }
     }

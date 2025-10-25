@@ -31,7 +31,11 @@ public final class StateEntityAssembler implements EntityAssembler<StateEntity, 
     @Override
     public StateDomain toDomain(StateEntity entity) {
         var entityTmp = ObjectHelper.getDefault(entity, new StateEntity());
-        return new StateDomain(UUIDHelper.getUUIDHelper().getDefault(entityTmp.getId()),
+        var countryDomain = CountryEntityAssembler.getCountryEntityAssembler().toDomain(entityTmp.getCountry());
+
+        return new StateDomain(
+                UUIDHelper.getUUIDHelper().getDefault(entityTmp.getId()),
+                countryDomain,
                 TextHelper.getDefaultWithTrim(entityTmp.getName())
         );
     }

@@ -21,6 +21,14 @@ public final class PostgresqlDAOFactory extends DAOFactory {
 
     @Override
     protected void openConnection() {
+
+        final String url = System.getProperty("db.url",
+                System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5433/classdoo"));
+        final String user = System.getProperty("db.user",
+                System.getenv().getOrDefault("DB_USER", "postgres"));
+        final String password = System.getProperty("db.password",
+                System.getenv().getOrDefault("DB_PASSWORD", "dino12345"));
+
         try {
             this.connection = DriverManager.getConnection("");
 
