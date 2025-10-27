@@ -13,8 +13,13 @@ public final class IdTypeDomain extends Domain {
         setName(TextHelper.getDefault());
     }
 
+    public IdTypeDomain(final UUID id) {
+        super(id);
+        setName(TextHelper.getDefault());
+    }
+
     public IdTypeDomain(final UUID id, final String name) {
-        super(UUIDHelper.getUUIDHelper().getDefault(id));
+        super(id);
         setName(name);
     }
 
