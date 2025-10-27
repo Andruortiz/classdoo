@@ -5,24 +5,32 @@ import java.util.UUID;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 
-public class CountryEntity extends Entity{
+public final class CountryEntity {
 
+    private UUID id;
     private String name;
 
     public CountryEntity() {
-        super(UUIDHelper.getUUIDHelper().getDefault());
+        setId(UUIDHelper.getUUIDHelper().getDefault());
         setName(TextHelper.getDefault());
     }
-
 
     public CountryEntity(final UUID id) {
-        super(id);
+        setId(id);
         setName(TextHelper.getDefault());
     }
 
-    public CountryEntity(final UUID id,final String name) {
-        super(id);
-        this.name = name;
+    public CountryEntity(final UUID id, final String name) {
+        setId(id);
+        setName(name);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
     public String getName() {
@@ -32,5 +40,4 @@ public class CountryEntity extends Entity{
     public void setName(final String name) {
         this.name = TextHelper.getDefaultWithTrim(name);
     }
-
 }

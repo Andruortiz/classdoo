@@ -2,28 +2,32 @@ package co.edu.uco.nose.dto;
 
 import java.util.UUID;
 
-public class CityDTO {
+import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+
+public final class CityDTO {
 
     private UUID id;
-    private String name;
     private StateDTO state;
+    private String name;
 
     public CityDTO() {
-        super();
-        this.id = UUID.randomUUID();
-        this.name = "";
-        this.state = new StateDTO();
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setState(new StateDTO());
+        setName(TextHelper.getDefault());
     }
 
-    public CityDTO(UUID id, String name, StateDTO state) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.state = state;
+    public CityDTO(final UUID id) {
+        setId(id);
+        setState(new StateDTO());
+        setName(TextHelper.getDefault());
     }
 
-    public static CityDTO build() {
-        return new CityDTO();
+    public CityDTO(final UUID id, final StateDTO state, final String name) {
+        setId(id);
+        setState(state);
+        setName(name);
     }
 
     public UUID getId() {
@@ -31,22 +35,22 @@ public class CityDTO {
     }
 
     public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
     public StateDTO getState() {
         return state;
     }
 
-    public void setState(StateDTO state) {
-        this.state = state;
+    public void setState(final StateDTO state) {
+        this.state = ObjectHelper.getDefault(state, new StateDTO());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = TextHelper.getDefaultWithTrim(name);
     }
 }

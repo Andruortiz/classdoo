@@ -2,150 +2,158 @@ package co.edu.uco.nose.dto;
 
 import java.util.UUID;
 
-public class UserDTO {
+import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+
+public final class UserDTO {
 
     private UUID id;
+    private IdTypeDTO idType;
+    private String idNumber;
     private String firstName;
     private String secondName;
-    private String firstLastName;
-    private String secondLastName;
-    private String identification;
-    private CityDTO residenceCity;
-    private IdTypeDTO idType;
+    private String firstSurname;
+    private String secondSurname;
+    private CityDTO homeCity;
     private String email;
-    private String phoneNumber;
+    private String mobileNumber;
     private boolean emailConfirmed;
     private boolean mobileNumberConfirmed;
 
     public UserDTO() {
-        super();
-        this.id = UUID.randomUUID();
-        this.firstName = "";
-        this.secondName = "";
-        this.firstLastName = "";
-        this.secondLastName = "";
-        this.identification = "";
-        this.residenceCity = new CityDTO();
-        this.idType = new IdTypeDTO();
-        this.email = "";
-        this.phoneNumber = "";
-        this.emailConfirmed = false;
-        this.mobileNumberConfirmed = false;
+        setId(UUIDHelper.getUUIDHelper().getDefault());
+        setIdType(new IdTypeDTO());
+        setIdNumber(TextHelper.getDefault());
+        setFirstName(TextHelper.getDefault());
+        setSecondName(TextHelper.getDefault());
+        setFirstSurname(TextHelper.getDefault());
+        setSecondSurname(TextHelper.getDefault());
+        setHomeCity(new CityDTO());
+        setEmail(TextHelper.getDefault());
+        setMobileNumber(TextHelper.getDefault());
+        setEmailConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
-    public UserDTO(UUID id, String firstName, String secondName, String firstLastName, String secondLastName,
-                   String identification, CityDTO residenceCity, IdTypeDTO idType, String email,
-                   String phoneNumber, boolean emailConfirmed, boolean mobileNumberConfirmed) {
-        this.id = id;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.firstLastName = firstLastName;
-        this.secondLastName = secondLastName;
-        this.identification = identification;
-        this.residenceCity = residenceCity;
-        this.idType = idType;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.emailConfirmed = emailConfirmed;
-        this.mobileNumberConfirmed = mobileNumberConfirmed;
+    public UserDTO(final UUID id) {
+        setId(id);
+        setIdType(new IdTypeDTO());
+        setIdNumber(TextHelper.getDefault());
+        setFirstName(TextHelper.getDefault());
+        setSecondName(TextHelper.getDefault());
+        setFirstSurname(TextHelper.getDefault());
+        setSecondSurname(TextHelper.getDefault());
+        setHomeCity(new CityDTO());
+        setEmail(TextHelper.getDefault());
+        setMobileNumber(TextHelper.getDefault());
+        setEmailConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
-    public UserDTO(UUID id, String firstName) {
-        this.id = id;
-        this.firstName = firstName;
+    public UserDTO(final UUID id, final IdTypeDTO idType, final String idNumber, final String firstName,
+                   final String secondName, final String firstSurname, final String secondSurname, final CityDTO homeCity,
+                   final String email, final String mobileNumber, final boolean emailConfirmed,
+                   final boolean mobileNumberConfirmed) {
+        setId(id);
+        setIdType(idType);
+        setIdNumber(idNumber);
+        setFirstName(firstName);
+        setSecondName(secondName);
+        setFirstSurname(firstSurname);
+        setSecondSurname(secondSurname);
+        setHomeCity(homeCity);
+        setEmail(email);
+        setMobileNumber(mobileNumber);
+        setEmailConfirmed(emailConfirmed);
+        setMobileNumberConfirmed(mobileNumberConfirmed);
     }
-
-    public static UserDTO build() {
-        return new UserDTO();
-    }
-
-    // Getters y Setters
 
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstLastName() {
-        return firstLastName;
-    }
-
-    public void setFirstLastName(String firstLastName) {
-        this.firstLastName = firstLastName;
-    }
-
-    public String getSecondLastName() {
-        return secondLastName;
-    }
-
-    public void setSecondLastName(String secondLastName) {
-        this.secondLastName = secondLastName;
-    }
-
-    public String getIdentification() {
-        return identification;
-    }
-
-    public void setIdentification(String identification) {
-        this.identification = identification;
-    }
-
-    public CityDTO getResidenceCity() {
-        return residenceCity;
-    }
-
-    public void setResidenceCity(CityDTO residenceCity) {
-        this.residenceCity = residenceCity;
+        this.id = UUIDHelper.getUUIDHelper().getDefault(id);
     }
 
     public IdTypeDTO getIdType() {
         return idType;
     }
 
-    public void setIdType(IdTypeDTO idType) {
-        this.idType = idType;
+    public void setIdType(final IdTypeDTO idType) {
+        this.idType = ObjectHelper.getDefault(idType, new IdTypeDTO());
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(final String idNumber) {
+        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(final String firstName) {
+        this.firstName = TextHelper.getDefaultWithTrim(firstName);
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(final String secondName) {
+        this.secondName = TextHelper.getDefaultWithTrim(secondName);
+    }
+
+    public String getFirstSurname() {
+        return firstSurname;
+    }
+
+    public void setFirstSurname(final String firstSurname) {
+        this.firstSurname = TextHelper.getDefaultWithTrim(firstSurname);
+    }
+
+    public String getSecondSurname() {
+        return secondSurname;
+    }
+
+    public void setSecondSurname(final String secondSurname) {
+        this.secondSurname = TextHelper.getDefaultWithTrim(secondSurname);
+    }
+
+    public CityDTO getHomeCity() {
+        return homeCity;
+    }
+
+    public void setHomeCity(final CityDTO homeCity) {
+        this.homeCity = ObjectHelper.getDefault(homeCity, new CityDTO());
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String email) {
+        this.email = TextHelper.getDefaultWithTrim(email);
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMobileNumber(final String mobileNumber) {
+        this.mobileNumber = TextHelper.getDefaultWithTrim(mobileNumber);
     }
 
     public boolean isEmailConfirmed() {
         return emailConfirmed;
     }
 
-    public void setEmailConfirmed(boolean emailConfirmed) {
+    public void setEmailConfirmed(final boolean emailConfirmed) {
         this.emailConfirmed = emailConfirmed;
     }
 
@@ -153,7 +161,7 @@ public class UserDTO {
         return mobileNumberConfirmed;
     }
 
-    public void setMobileNumberConfirmed(boolean mobileNumberConfirmed) {
+    public void setMobileNumberConfirmed(final boolean mobileNumberConfirmed) {
         this.mobileNumberConfirmed = mobileNumberConfirmed;
     }
 }
