@@ -1,11 +1,8 @@
 package co.edu.uco.nose.business.assembler.dto.impl;
 
 import co.edu.uco.nose.business.assembler.dto.DTOAssembler;
-import co.edu.uco.nose.business.domain.CountryDomain;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
-import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
-import co.edu.uco.nose.dto.CountryDTO;
 import co.edu.uco.nose.dto.UserDTO;
 
 import java.util.ArrayList;

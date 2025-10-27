@@ -20,7 +20,7 @@ public final class NoseException extends RuntimeException {
     }
 
 
-    public static NoseException create(final String userMessage, final String technicalMessage, final Throwable rootException) {
+    public static NoseException create(final Throwable rootException, final String userMessage, final String technicalMessage) {
         return new NoseException(rootException, userMessage, technicalMessage);
     }
 
