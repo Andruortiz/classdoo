@@ -107,27 +107,5 @@ public abstract class DAOFactory {
         }
     }
 
-    /**
-     * Prueba rápida para verificar la conexión a PostgreSQL.
-     */
-    public static void main(String[] args) {
-        try {
-            PostgresqlDAOFactory factory = new PostgresqlDAOFactory();
 
-            if (factory.getConnection() != null && !factory.getConnection().isClosed()) {
-                System.out.println("✅ Conexión a PostgreSQL establecida correctamente.");
-            } else {
-                System.out.println("❌ No se pudo establecer la conexión a PostgreSQL.");
-            }
-
-        } catch (NoseException e) {
-            System.err.println("🚨 Error al conectar: " + e.getUserMessage());
-            System.err.println("🧠 Mensaje técnico: " + e.getTechnicalMessage());
-            e.getRootException().printStackTrace();
-
-        } catch (Exception e) {
-            System.err.println("🚨 Excepción general: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 }

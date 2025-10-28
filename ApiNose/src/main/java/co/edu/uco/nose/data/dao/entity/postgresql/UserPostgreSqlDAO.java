@@ -16,7 +16,7 @@ import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.data.dao.entity.UserDAO;
 import co.edu.uco.nose.entity.UserEntity;
 
-public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
+public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
 
     public UserPostgreSqlDAO(final Connection connection) {
         super(connection);
@@ -27,24 +27,26 @@ public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
         SqlConnectionHelper.ensureTransactionIsStarted(getConnection());
 
         final var sql = new StringBuilder();
-        sql.append("INSERT INTO User(id, idType, firstName, secondName, firstLastName, secondLastName, residenceCity, email, phoneNumber, emailConfirmed, mobileNumberConfirmed) ");
-        sql.append("VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        sql.append("INSERT INTO classdoo.users(id, id_type, id_number, first_name, second_name, first_surname, second_surname, home_city, email, mobile_number, email_confirmed, mobile_number_confirmed) ");
+        sql.append("VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         try (final PreparedStatement preparedStatement = this.getConnection().prepareStatement(sql.toString())) {
             preparedStatement.setObject(1, entity.getId());
             preparedStatement.setObject(2, entity.getIdType().getId());
-            preparedStatement.setString(3, entity.getFirstName());
-            preparedStatement.setString(4, entity.getSecondName());
-            preparedStatement.setString(5, entity.getFirstSurname());
-            preparedStatement.setString(6, entity.getSecondSurname());
-            preparedStatement.setObject(7, entity.getHomeCity().getId());
-            preparedStatement.setString(8, entity.getEmail());
-            preparedStatement.setString(9, entity.getMobileNumber());
-            preparedStatement.setBoolean(10, entity.isEmailConfirmed());
-            preparedStatement.setBoolean(11, entity.isMobileNumberConfirmed());
+            preparedStatement.setString(3, entity.getIdNumber());
+            preparedStatement.setString(4, entity.getFirstName());
+            preparedStatement.setString(5, entity.getSecondName());
+            preparedStatement.setString(6, entity.getFirstSurname());
+            preparedStatement.setString(7, entity.getSecondSurname());
+            preparedStatement.setObject(8, entity.getHomeCity().getId());
+            preparedStatement.setString(9, entity.getEmail());
+            preparedStatement.setString(10, entity.getMobileNumber());
+            preparedStatement.setBoolean(11, entity.isEmailConfirmed());
+            preparedStatement.setBoolean(12, entity.isMobileNumberConfirmed());
             preparedStatement.executeUpdate();
 
         } catch (final SQLException exception) {
+            exception.printStackTrace();
             throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_SQL_CREATE.getContent(),
                     MessagesEnum.TECHNICAL_ERROR_SQL_CREATE.getContent()
@@ -223,10 +225,10 @@ public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
     public void update(final UserEntity entity) {
         SqlConnectionHelper.ensureTransactionIsStarted(getConnection());
         final var sql = new StringBuilder();
-        sql.append("UPDATE User SET idType = ?, phoneNumber = ?, firstName = ?, secondName = ?, firstLastName = ?, secondLastName = ?, residenceCity = ?, email = ?, phoneNumber = ?, emailConfirmed = ?, mobileNumberConfirmed = ? WHERE id = ?");
+        sql.append("UPDATE classdoo.users SET id_type = ?, id_number = ?, first_name = ?, second_name = ?, first_surname = ?, second_surname = ?, home_city = ?, email = ?, mobile_number = ?, email_confirmed = ?, mobile_number_confirmed = ? WHERE id = ?");
         try (final PreparedStatement preparedStatement = this.getConnection().prepareStatement(sql.toString())) {
             preparedStatement.setObject(1, entity.getIdType().getId());
-            preparedStatement.setString(2, entity.getMobileNumber());
+            preparedStatement.setString(2, entity.getIdNumber());
             preparedStatement.setString(3, entity.getFirstName());
             preparedStatement.setString(4, entity.getSecondName());
             preparedStatement.setString(5, entity.getFirstSurname());
@@ -264,7 +266,7 @@ public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
     public void delete(final UUID id) {
         SqlConnectionHelper.ensureTransactionIsStarted(getConnection());
         final var sql = new StringBuilder();
-        sql.append("DELETE FROM User WHERE id = ?");
+        sql.append("DELETE FROM users WHERE id = ?");
         try (final PreparedStatement preparedStatement = this.getConnection().prepareStatement(sql.toString())) {
             preparedStatement.setObject(1, id);
             preparedStatement.executeUpdate();
@@ -292,8 +294,63 @@ public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
 
     @Override
     public List<UserEntity> findAll() {
-        // Implementación mínima para cumplir la firma del DAO.
-        // Si se requiere la lectura real de la BD, reemplazar por la consulta correspondiente y mapeo de resultados.
-        return new ArrayList<>();
+        SqlConnectionHelper.ensureTransactionIsStarted(getConnection());
+
+        final var sql = new StringBuilder();
+        sql.append("SELECT id, id_type, id_number, first_name, second_name, first_surname, second_surname, ");
+        sql.append("home_city, email, mobile_number, email_confirmed, mobile_number_confirmed ");
+        sql.append("FROM classdoo.users");
+
+        final List<UserEntity> users = new ArrayList<>();
+
+        try (final PreparedStatement preparedStatement = getConnection().prepareStatement(sql.toString());
+             final ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                final UserEntity user = new UserEntity();
+                user.setId((UUID) resultSet.getObject("id"));
+
+                // Relación con idType
+                var idType = new co.edu.uco.nose.entity.IdTypeEntity();
+                idType.setId((UUID) resultSet.getObject("id_type"));
+                user.setIdType(idType);
+
+                user.setIdNumber(resultSet.getString("id_number"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setSecondName(resultSet.getString("second_name"));
+                user.setFirstSurname(resultSet.getString("first_surname"));
+                user.setSecondSurname(resultSet.getString("second_surname"));
+
+                // Relación con homeCity
+                var city = new co.edu.uco.nose.entity.CityEntity();
+                city.setId((UUID) resultSet.getObject("home_city"));
+                user.setHomeCity(city);
+
+                user.setEmail(resultSet.getString("email"));
+                user.setMobileNumber(resultSet.getString("mobile_number"));
+                user.setEmailConfirmed(resultSet.getBoolean("email_confirmed"));
+                user.setMobileNumberConfirmed(resultSet.getBoolean("mobile_number_confirmed"));
+
+                users.add(user);
+            }
+
+        } catch (final SQLException exception) {
+            throw NoseException.create(exception,
+                    MessagesEnum.USER_ERROR_SQL_FIND_ALL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_SQL_FIND_ALL.getContent()
+            );
+        } catch (final Exception exception) {
+            throw NoseException.create(exception,
+                    MessagesEnum.USER_ERROR_UNEXPECTED_FIND_ALL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_FIND_ALL.getContent()
+            );
+        } catch (final Throwable exception) {
+            throw NoseException.create(exception,
+                    MessagesEnum.USER_ERROR_CRITICAL_FIND_ALL.getContent(),
+                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_FIND_ALL.getContent()
+            );
+        }
+
+        return users;
     }
 }

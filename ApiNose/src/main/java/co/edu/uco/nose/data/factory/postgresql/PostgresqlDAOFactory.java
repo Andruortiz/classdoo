@@ -13,6 +13,13 @@ public final class PostgresqlDAOFactory extends DAOFactory {
 
     public PostgresqlDAOFactory() {
         openConnection();
+
+        if (this.connection == null) {
+            System.out.println("❌ Conexión no se creó (connection sigue en null)");
+        } else {
+            System.out.println("✅ Conexión activa: " + this.connection);
+        }
+
     }
 
     @Override
@@ -22,39 +29,34 @@ public final class PostgresqlDAOFactory extends DAOFactory {
         final String password = "dino12345";
 
         try {
-            // Registrar el driver JDBC explícitamente
+            System.out.println("Intentando registrar driver PostgreSQL...");
             Class.forName("org.postgresql.Driver");
+            System.out.println("Driver PostgreSQL cargado exitosamente.");
 
+            System.out.println("Intentando conectar a " + url);
             this.connection = DriverManager.getConnection(url, user, password);
-            System.out.println("✅ Conexión establecida correctamente con PostgreSQL en: " + url);
 
-        } catch (final SQLException exception) {
-            throw NoseException.create(
-                    exception,
+            if (this.connection != null && !this.connection.isClosed()) {
+                System.out.println("✅ Conexión establecida correctamente con PostgreSQL en: " + url);
+            } else {
+                System.out.println("❌ La conexión se creó pero está cerrada o es nula.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error SQL al intentar conectarse: " + e.getMessage());
+            throw NoseException.create(e,
                     MessagesEnum.USER_ERROR_DATABASE_CONNECTION.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_DATABASE_CONNECTION.getContent()
-            );
-
-        } catch (final ClassNotFoundException exception) {
-            throw NoseException.create(
-                    exception,
+                    MessagesEnum.TECHNICAL_ERROR_DATABASE_CONNECTION.getContent());
+        } catch (ClassNotFoundException e) {
+            System.out.println("❌ Driver de PostgreSQL no encontrado: " + e.getMessage());
+            throw NoseException.create(e,
                     MessagesEnum.USER_ERROR_MISSING_DRIVER.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_MISSING_DRIVER.getContent()
-            );
-
-        } catch (final Exception exception) {
-            throw NoseException.create(
-                    exception,
+                    MessagesEnum.TECHNICAL_ERROR_MISSING_DRIVER.getContent());
+        } catch (Exception e) {
+            System.out.println("❌ Error inesperado: " + e.getMessage());
+            throw NoseException.create(e,
                     MessagesEnum.USER_ERROR_UNEXPECTED_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_CREATE.getContent()
-            );
-
-        } catch (final Throwable exception) {
-            throw NoseException.create(
-                    exception,
-                    MessagesEnum.USER_ERROR_CRITICAL_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_CREATE.getContent()
-            );
+                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_CREATE.getContent());
         }
     }
 

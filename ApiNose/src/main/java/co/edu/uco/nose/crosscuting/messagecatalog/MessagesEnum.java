@@ -520,7 +520,34 @@ public enum MessagesEnum {
     USER_ERROR_MISSING_DRIVER("No se pudo establecer la conexión porque falta el driver de base de datos.",
             "La aplicación no pudo encontrar el driver JDBC necesario para conectarse a la base de datos. Por favor, asegúrese de que el driver esté incluido en el classpath."),
     TECHNICAL_ERROR_MISSING_DRIVER("El driver JDBC de PostgreSQL no fue encontrado en el classpath.",
-            "Se produjo un error ClassNotFoundException al intentar cargar el driver JDBC de PostgreSQL. Verifique que la dependencia esté correctamente configurada.");
+            "Se produjo un error ClassNotFoundException al intentar cargar el driver JDBC de PostgreSQL. Verifique que la dependencia esté correctamente configurada."),
+    USER_ERROR_SQL_FIND_ALL(
+        "Error ejecutando la consulta para obtener todos los usuarios",
+                "Ocurrió un problema al intentar recuperar todos los usuarios desde la fuente de datos. Por favor intente nuevamente o contacte al administrador."
+    ),
+    TECHNICAL_ERROR_SQL_FIND_ALL(
+        "Error SQL al obtener todos los usuarios",
+                "Se presentó un SQLException al ejecutar la consulta para obtener todos los usuarios. Revise la traza técnica para más detalles."
+    ),
+    USER_ERROR_UNEXPECTED_FIND_ALL(
+        "Error inesperado al obtener todos los usuarios",
+                "Ocurrió un problema no controlado al intentar obtener todos los usuarios. Intente nuevamente."
+    ),
+    TECHNICAL_ERROR_UNEXPECTED_FIND_ALL(
+        "Excepción no controlada al obtener todos los usuarios",
+                "Se lanzó una Exception inesperada durante la operación de obtención de todos los usuarios. Revise la traza técnica."
+    ),
+    USER_ERROR_CRITICAL_FIND_ALL(
+        "Error crítico al obtener todos los usuarios",
+                "Se presentó un fallo crítico al intentar recuperar todos los usuarios. Contacte al administrador del sistema."
+    ),
+    TECHNICAL_ERROR_CRITICAL_FIND_ALL(
+        "Fallo crítico al obtener todos los usuarios",
+                "Se capturó un Throwable crítico durante la operación de obtención de todos los usuarios. Revise los registros del sistema."
+    );
+
+
+
 
 
 

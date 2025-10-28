@@ -10,7 +10,7 @@ public abstract class SqlConnection {
     private Connection connection;
 
     protected SqlConnection(Connection connection2) {
-        setConnection(connection);
+        setConnection(connection2);
     }
 
     public Connection getConnection() {
