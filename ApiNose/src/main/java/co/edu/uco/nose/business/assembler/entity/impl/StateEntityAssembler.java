@@ -5,6 +5,7 @@ import co.edu.uco.nose.business.domain.StateDomain;
 import co.edu.uco.nose.crosscuting.helper.ObjectHelper;
 import co.edu.uco.nose.crosscuting.helper.TextHelper;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
+import co.edu.uco.nose.entity.CountryEntity;
 import co.edu.uco.nose.entity.StateEntity;
 
 public final class StateEntityAssembler implements EntityAssembler<StateEntity, StateDomain> {
@@ -21,9 +22,9 @@ public final class StateEntityAssembler implements EntityAssembler<StateEntity, 
     @Override
     public StateEntity toEntity(StateDomain domain) {
         var domainTmp = ObjectHelper.getDefault(domain, new StateDomain());
-
+        var countryEntity = CountryEntityAssembler.getCountryEntityAssembler().toEntity(domainTmp.getCountry());
         return new StateEntity(
-                UUIDHelper.getUUIDHelper().getDefault(domainTmp.getId()),
+                UUIDHelper.getUUIDHelper().getDefault(domainTmp.getId()), countryEntity,
                 TextHelper.getDefaultWithTrim(domainTmp.getName())
         );
     }

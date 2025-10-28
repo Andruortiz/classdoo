@@ -50,23 +50,26 @@ public final  class UserBusinessImpl implements UserBusiness {
         // Tipo de identificación + número
         var filterById = new UserEntity();
         filterById.setIdType(new IdTypeEntity(user.getIdType().getId()));
-        filterById.setIdentification(user.getIdentificationNumber());
+        filterById.setIdNumber(user.getIdNumber());
         if (!userDAO.findByFilter(filterById).isEmpty()) {
-            throw NoseException.create(VALIDATION_ID_DUPLICATED.getTitle(), VALIDATION_ID_DUPLICATED.getContent());
+            throw NoseException.create(VALIDATION_ID_DUPLICATED.getTitle(),
+                    VALIDATION_ID_DUPLICATED.getContent());
         }
 
         // Correo electrónico
         var filterByEmail = new UserEntity();
         filterByEmail.setEmail(user.getEmail());
         if (!userDAO.findByFilter(filterByEmail).isEmpty()) {
-            throw NoseException.create(VALIDATION_EMAIL_DUPLICATED.getTitle(), VALIDATION_EMAIL_DUPLICATED.getContent());
+            throw NoseException.create(VALIDATION_EMAIL_DUPLICATED.getTitle(),
+                    VALIDATION_EMAIL_DUPLICATED.getContent());
         }
 
         // Número de teléfono
         var filterByPhone = new UserEntity();
-        filterByPhone.setPhoneNumber(user.getMobileNumber());
+        filterByPhone.setMobileNumber(user.getMobileNumber());
         if (!userDAO.findByFilter(filterByPhone).isEmpty()) {
-            throw NoseException.create(VALIDATION_PHONE_DUPLICATED.getTitle(), VALIDATION_PHONE_DUPLICATED.getContent());
+            throw NoseException.create(VALIDATION_PHONE_DUPLICATED.getTitle(),
+                    VALIDATION_PHONE_DUPLICATED.getContent());
         }
     }
 
@@ -76,9 +79,9 @@ public final  class UserBusinessImpl implements UserBusiness {
     public void dropUserInformation(UUID id) {
         try {
             daoFactory.getUserDAO().delete(id);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_UNEXPECTED_DELETE.getTitle(),
-                    TECHNICAL_ERROR_UNEXPECTED_DELETE.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, TECHNICAL_ERROR_UNEXPECTED_DELETE.getTitle(),
+                    TECHNICAL_ERROR_UNEXPECTED_DELETE.getContent());
         }
     }
 
@@ -90,9 +93,9 @@ public final  class UserBusinessImpl implements UserBusiness {
             UserEntity userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
             userEntity.setId(id);
             daoFactory.getUserDAO().update(userEntity);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_UNEXPECTED_UPDATE.getTitle(),
-                    TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, TECHNICAL_ERROR_UNEXPECTED_UPDATE.getTitle(),
+                    TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent());
         }
     }
 
@@ -102,9 +105,9 @@ public final  class UserBusinessImpl implements UserBusiness {
         try {
             var entities = daoFactory.getUserDAO().findAll();
             return UserEntityAssembler.getUserEntityAssembler().toDomainList(entities);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getTitle(),
-                    TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getTitle(),
+                    TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getContent());
         }
     }
 
@@ -114,9 +117,9 @@ public final  class UserBusinessImpl implements UserBusiness {
         try {
             var entities = daoFactory.getUserDAO().findAll();
             return UserEntityAssembler.getUserEntityAssembler().toDomainList(entities);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getTitle(),
-                    TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, USER_ERROR_FIND_ALL_UNEXPECTED.getContent(),
+                    TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getContent());
         }
     }
 
@@ -125,9 +128,9 @@ public final  class UserBusinessImpl implements UserBusiness {
         try {
             var entities = daoFactory.getUserDAO().findByFilter(userFilters);
             return UserEntityAssembler.getUserEntityAssembler().toDomainList(entities);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED.getTitle(),
-                    TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, USER_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
+                    TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent());
         }
     }
 
@@ -137,9 +140,9 @@ public final  class UserBusinessImpl implements UserBusiness {
         try {
             UserEntity entity = daoFactory.getUserDAO().findById(id);
             return entity == null ? null : UserEntityAssembler.getUserEntityAssembler().toDomain(entity);
-        } catch (Exception ex) {
-            throw NoseException.create(TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED.getTitle(),
-                    TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED.getContent(), ex);
+        } catch (Exception exception) {
+            throw NoseException.create(exception, USER_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
+                    TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED.getContent());
         }
     }
 

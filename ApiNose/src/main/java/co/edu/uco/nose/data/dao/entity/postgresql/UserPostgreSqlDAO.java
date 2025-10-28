@@ -16,7 +16,7 @@ import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.data.dao.entity.UserDAO;
 import co.edu.uco.nose.entity.UserEntity;
 
-public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
+public final class  UserPostgreSqlDAO extends SqlConnection implements UserDAO {
 
     public UserPostgreSqlDAO(final Connection connection) {
         super(connection);
@@ -35,32 +35,32 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
             preparedStatement.setObject(2, entity.getIdType().getId());
             preparedStatement.setString(3, entity.getFirstName());
             preparedStatement.setString(4, entity.getSecondName());
-            preparedStatement.setString(5, entity.getFirstLastName());
-            preparedStatement.setString(6, entity.getSecondLastName());
-            preparedStatement.setObject(7, entity.getResidenceCity().getId());
+            preparedStatement.setString(5, entity.getFirstSurname());
+            preparedStatement.setString(6, entity.getSecondSurname());
+            preparedStatement.setObject(7, entity.getHomeCity().getId());
             preparedStatement.setString(8, entity.getEmail());
-            preparedStatement.setString(9, entity.getPhoneNumber());
+            preparedStatement.setString(9, entity.getMobileNumber());
             preparedStatement.setBoolean(10, entity.isEmailConfirmed());
-            preparedStatement.setBoolean(11, entity.isPhoneNumberConfirmed());
+            preparedStatement.setBoolean(11, entity.isMobileNumberConfirmed());
             preparedStatement.executeUpdate();
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_SQL_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_SQL_CREATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_SQL_CREATE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_UNEXPECTED_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_CREATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_CREATE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_CRITICAL_CREATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_CREATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_CREATE.getContent()
+
             );
         }
     }
@@ -92,16 +92,16 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
         if (filterEntity.getSecondName() != null && !filterEntity.getSecondName().trim().isEmpty()) {
             whereClauses.add("secondname ILIKE ?");
         }
-        if (filterEntity.getFirstLastName() != null && !filterEntity.getFirstLastName().trim().isEmpty()) {
+        if (filterEntity.getFirstSurname() != null && !filterEntity.getFirstSurname().trim().isEmpty()) {
             whereClauses.add("firstlastname ILIKE ?");
         }
-        if (filterEntity.getSecondLastName() != null && !filterEntity.getSecondLastName().trim().isEmpty()) {
+        if (filterEntity.getSecondSurname() != null && !filterEntity.getSecondSurname().trim().isEmpty()) {
             whereClauses.add("secondlastname ILIKE ?");
         }
         if (filterEntity.getEmail() != null && !filterEntity.getEmail().trim().isEmpty()) {
             whereClauses.add("email ILIKE ?");
         }
-        if (filterEntity.getPhoneNumber() != null && !filterEntity.getPhoneNumber().trim().isEmpty()) {
+        if (filterEntity.getMobileNumber() != null && !filterEntity.getMobileNumber().trim().isEmpty()) {
             whereClauses.add("phonenumber ILIKE ?");
         }
 
@@ -125,17 +125,17 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
             if (filterEntity.getSecondName() != null && !filterEntity.getSecondName().trim().isEmpty()) {
                 preparedStatement.setString(index++, "%" + filterEntity.getSecondName().trim() + "%");
             }
-            if (filterEntity.getFirstLastName() != null && !filterEntity.getFirstLastName().trim().isEmpty()) {
-                preparedStatement.setString(index++, "%" + filterEntity.getFirstLastName().trim() + "%");
+            if (filterEntity.getFirstSurname() != null && !filterEntity.getFirstSurname().trim().isEmpty()) {
+                preparedStatement.setString(index++, "%" + filterEntity.getFirstSurname().trim() + "%");
             }
-            if (filterEntity.getSecondLastName() != null && !filterEntity.getSecondLastName().trim().isEmpty()) {
-                preparedStatement.setString(index++, "%" + filterEntity.getSecondLastName().trim() + "%");
+            if (filterEntity.getSecondSurname() != null && !filterEntity.getSecondSurname().trim().isEmpty()) {
+                preparedStatement.setString(index++, "%" + filterEntity.getSecondSurname().trim() + "%");
             }
             if (filterEntity.getEmail() != null && !filterEntity.getEmail().trim().isEmpty()) {
                 preparedStatement.setString(index++, "%" + filterEntity.getEmail().trim() + "%");
             }
-            if (filterEntity.getPhoneNumber() != null && !filterEntity.getPhoneNumber().trim().isEmpty()) {
-                preparedStatement.setString(index++, "%" + filterEntity.getPhoneNumber().trim() + "%");
+            if (filterEntity.getMobileNumber() != null && !filterEntity.getMobileNumber().trim().isEmpty()) {
+                preparedStatement.setString(index++, "%" + filterEntity.getMobileNumber().trim() + "%");
             }
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -145,10 +145,10 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
                     user.setId((UUID) resultSet.getObject("id"));
                     user.setFirstName(resultSet.getString("firstname"));
                     user.setSecondName(resultSet.getString("secondname"));
-                    user.setFirstLastName(resultSet.getString("firstlastname"));
-                    user.setSecondLastName(resultSet.getString("secondlastname"));
+                    user.setFirstSurname(resultSet.getString("firstlastname"));
+                    user.setSecondSurname(resultSet.getString("secondlastname"));
                     user.setEmail(resultSet.getString("email"));
-                    user.setPhoneNumber(resultSet.getString("phone"));
+                    user.setMobileNumber(resultSet.getString("phone"));
                     user.setEmailConfirmed(resultSet.getBoolean("emailconfirmation"));
                     user.setMobileNumberConfirmed(resultSet.getBoolean("phoneconfirmation"));
                     users.add(user);
@@ -157,22 +157,22 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
             }
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_FILTER_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL.getContent()
+
             );
         }
     }
@@ -199,22 +199,22 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
             }
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_ID_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_FIND_BY_ID_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL.getContent()
+
             );
         }
     }
@@ -226,36 +226,36 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
         sql.append("UPDATE User SET idType = ?, phoneNumber = ?, firstName = ?, secondName = ?, firstLastName = ?, secondLastName = ?, residenceCity = ?, email = ?, phoneNumber = ?, emailConfirmed = ?, mobileNumberConfirmed = ? WHERE id = ?");
         try (final PreparedStatement preparedStatement = this.getConnection().prepareStatement(sql.toString())) {
             preparedStatement.setObject(1, entity.getIdType().getId());
-            preparedStatement.setString(2, entity.getPhoneNumber());
+            preparedStatement.setString(2, entity.getMobileNumber());
             preparedStatement.setString(3, entity.getFirstName());
             preparedStatement.setString(4, entity.getSecondName());
-            preparedStatement.setString(5, entity.getFirstLastName());
-            preparedStatement.setString(6, entity.getSecondLastName());
-            preparedStatement.setObject(7, entity.getResidenceCity().getId());
+            preparedStatement.setString(5, entity.getFirstSurname());
+            preparedStatement.setString(6, entity.getSecondSurname());
+            preparedStatement.setObject(7, entity.getHomeCity().getId());
             preparedStatement.setString(8, entity.getEmail());
-            preparedStatement.setString(9, entity.getPhoneNumber());
+            preparedStatement.setString(9, entity.getMobileNumber());
             preparedStatement.setBoolean(10, entity.isEmailConfirmed());
-            preparedStatement.setBoolean(11, entity.isPhoneNumberConfirmed());
+            preparedStatement.setBoolean(11, entity.isMobileNumberConfirmedIsDefaultValue());
             preparedStatement.setObject(12, entity.getId());
             preparedStatement.executeUpdate();
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_SQL_UPDATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_SQL_UPDATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_SQL_UPDATE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_UNEXPECTED_UPDATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_UPDATE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_CRITICAL_UPDATE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_UPDATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_UPDATE.getContent()
+
             );
         }
     }
@@ -270,22 +270,22 @@ public final class UserPostgreSqlDAO extends SqlConnection implements UserDAO {
             preparedStatement.executeUpdate();
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_SQL_DELETE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_SQL_UPDATE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_SQL_DELETE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_UNEXPECTED_DELETE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_DELETE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_UNEXPECTED_DELETE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.USER_ERROR_CRITICAL_DELETE.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_DELETE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_CRITICAL_DELETE.getContent()
+
             );
         }
     }

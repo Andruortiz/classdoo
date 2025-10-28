@@ -1,9 +1,8 @@
-package co.edu.uco.nose.business.facede.impl;
+package co.edu.uco.nose.business.facade.impl;
 
 import co.edu.uco.nose.business.assembler.dto.impl.UserDTOAssembler;
-import co.edu.uco.nose.business.business.UserBusiness;
 import co.edu.uco.nose.business.business.impl.UserBusinessImpl;
-import co.edu.uco.nose.business.facede.UserFacade;
+import co.edu.uco.nose.business.facade.UserFacade;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.data.factory.DAOFactory;
 import co.edu.uco.nose.dto.UserDTO;
@@ -35,7 +34,7 @@ public final class UserFacadeImpl implements UserFacade {
 
             var userMessage = "";
             var technicalMessage = "";
-            throw NoseException.create( userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
 
         } finally {
             daoFactory.closeConnection();

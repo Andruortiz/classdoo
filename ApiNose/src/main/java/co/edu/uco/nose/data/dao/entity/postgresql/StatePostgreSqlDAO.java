@@ -3,6 +3,7 @@ import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.messagecatalog.MessagesEnum;
 import co.edu.uco.nose.data.dao.entity.SqlConnection;
 import co.edu.uco.nose.data.dao.entity.StateDAO;
+import co.edu.uco.nose.entity.CountryEntity;
 import co.edu.uco.nose.entity.StateEntity;
 
 import java.sql.Connection;
@@ -30,8 +31,10 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
             final List<StateEntity> results = new ArrayList<>();
 
             while (resultSet.next()) {
+                var country = new CountryEntity((UUID) resultSet.getObject("country_id"));
                 var state = new StateEntity(
                         (UUID) resultSet.getObject("id"),
+                        country,
                         resultSet.getString("name")
                 );
                 results.add(state);
@@ -42,17 +45,17 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
         } catch (final SQLException exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_ALL_SQL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
 
         } catch (final Exception exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_ALL_UNEXPECTED.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
 
         } catch (final Throwable exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_ALL_CRITICAL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
         }
     }
 
@@ -91,10 +94,13 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 final List<StateEntity> results = new ArrayList<>();
                 while (resultSet.next()) {
-                    results.add(new StateEntity(
+                    var country = new CountryEntity((UUID) resultSet.getObject("country_id"));
+                    var state = new StateEntity(
                             (UUID) resultSet.getObject("id"),
+                            country,
                             resultSet.getString("name")
-                    ));
+                    );
+                    results.add(state);
                 }
                 return results;
             }
@@ -102,17 +108,17 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
         } catch (final SQLException exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_FILTER_SQL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
 
         } catch (final Exception exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
 
         } catch (final Throwable exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_FILTER_CRITICAL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage );
         }
     }
 
@@ -129,8 +135,9 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
             final ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                return new StateEntity(
-                        (UUID) resultSet.getObject("id"),
+                var country = new CountryEntity((UUID) resultSet.getObject("country_id"));
+                return new StateEntity((UUID) resultSet.getObject("id"),
+                        country,
                         resultSet.getString("name")
                 );
             }
@@ -140,21 +147,21 @@ public final class StatePostgreSqlDAO extends SqlConnection implements StateDAO{
         } catch (final SQLException exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_ID_SQL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage);
 
 
 
         } catch (final Exception exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_ID_UNEXPECTED.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage);
 
 
 
         } catch (final Throwable exception) {
             var userMessage = MessagesEnum.STATE_ERROR_FIND_BY_ID_CRITICAL.getContent();
             var technicalMessage = MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_STATE.getContent();
-            throw NoseException.create(userMessage, technicalMessage, exception);
+            throw NoseException.create(exception, userMessage, technicalMessage);
         }
         }
     }

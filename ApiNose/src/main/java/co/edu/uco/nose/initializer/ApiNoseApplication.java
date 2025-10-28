@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@ComponentScan(basePackages = {"co.edu.uco.nose."})
+@ComponentScan(basePackages = {"co.edu.uco.nose"})
 @SpringBootApplication
 public class ApiNoseApplication {
 

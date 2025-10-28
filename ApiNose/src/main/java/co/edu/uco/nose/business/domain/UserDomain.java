@@ -7,7 +7,7 @@ import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 public final class UserDomain extends Domain {
 
     private IdTypeDomain idType;
-    private String identificationNumber;
+    private String idNumber;
     private String firstName;
     private String middleName;
     private String firstLastName;
@@ -21,7 +21,7 @@ public final class UserDomain extends Domain {
     public UserDomain() {
         super(UUIDHelper.getUUIDHelper().getDefault());
         setIdType(new IdTypeDomain());
-        setIdentificationNumber(TextHelper.getDefault());
+        setIdNumber(TextHelper.getDefault());
         setFirstName(TextHelper.getDefault());
         setMiddleName(TextHelper.getDefault());
         setFirstLastName(TextHelper.getDefault());
@@ -33,7 +33,7 @@ public final class UserDomain extends Domain {
         setMobileConfirmed(false);
     }
 
-    public UserDomain(final UUID id, final IdTypeDomain idType, final String identificationNumber,
+    public UserDomain(final UUID id, final IdTypeDomain idType, final String idNumber,
                       final String firstName, final String middleName,
                       final String firstLastName, final String secondLastName,
                       final CityDomain cityOfResidence, final String email,
@@ -41,7 +41,7 @@ public final class UserDomain extends Domain {
                       final boolean mobileConfirmed) {
         super(UUIDHelper.getUUIDHelper().getDefault(id));
         setIdType(idType);
-        setIdentificationNumber(identificationNumber);
+        setIdNumber(idNumber);
         setFirstName(firstName);
         setMiddleName(middleName);
         setFirstLastName(firstLastName);
@@ -56,7 +56,7 @@ public final class UserDomain extends Domain {
     public UserDomain(final UUID id) {
         super(UUIDHelper.getUUIDHelper().getDefault(id));
         setIdType(new IdTypeDomain());
-        setIdentificationNumber(TextHelper.getDefault());
+        setIdNumber(TextHelper.getDefault());
         setFirstName(TextHelper.getDefault());
         setMiddleName(TextHelper.getDefault());
         setFirstLastName(TextHelper.getDefault());
@@ -83,12 +83,12 @@ public final class UserDomain extends Domain {
         this.idType = (idType == null) ? new IdTypeDomain() : idType;
     }
 
-    public String getIdentificationNumber() {
-        return identificationNumber;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    public void setIdentificationNumber(final String identificationNumber) {
-        this.identificationNumber = TextHelper.getDefaultWithTrim(identificationNumber);
+    public void setIdNumber(final String idNumber) {
+        this.idNumber = TextHelper.getDefaultWithTrim(idNumber);
     }
 
     public String getFirstName() {

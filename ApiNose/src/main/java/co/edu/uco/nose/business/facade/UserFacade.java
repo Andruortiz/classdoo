@@ -1,4 +1,4 @@
-package co.edu.uco.nose.business.facede;
+package co.edu.uco.nose.business.facade;
 import co.edu.uco.nose.dto.UserDTO;
 
 

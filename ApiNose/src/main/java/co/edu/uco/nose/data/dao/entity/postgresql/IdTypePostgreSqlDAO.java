@@ -42,22 +42,22 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
             return idTypes;
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_ALL_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_SQL_ID_TYPE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_ALL_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_UNEXPECTED_ID_TYPE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_ALL_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_ALL_CRITICAL_ID_TYPE.getContent()
+
             );
         }
     }
@@ -111,22 +111,22 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
             }
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_SQL_ID_TYPE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_UNEXPECTED_ID_TYPE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_FILTER_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_FILTER_CRITICAL_ID_TYPE.getContent()
+
             );
         }
     }
@@ -150,22 +150,22 @@ public final class IdTypePostgreSqlDAO extends SqlConnection implements IdTypeDA
             }
 
         } catch (final SQLException exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_SQL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_SQL_ID_TYPE.getContent()
+
             );
         } catch (final Exception exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_UNEXPECTED.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_UNEXPECTED_ID_TYPE.getContent()
+
             );
         } catch (final Throwable exception) {
-            throw NoseException.create(
+            throw NoseException.create(exception,
                     MessagesEnum.ID_TYPE_ERROR_FIND_BY_ID_CRITICAL.getContent(),
-                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_ID_TYPE.getContent(),
-                    exception
+                    MessagesEnum.TECHNICAL_ERROR_FIND_BY_ID_CRITICAL_ID_TYPE.getContent()
+
             );
         }
     }
