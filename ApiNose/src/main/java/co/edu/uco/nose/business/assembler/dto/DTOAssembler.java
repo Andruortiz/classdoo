@@ -7,7 +7,7 @@ public interface DTOAssembler<T, D> {
     T toDTO(D  domain);
     D toDomain(T dto);
 
-    List<T> toDTO(List<D> domaindList);
+    List<T> toDTO(List<D> domainList);
 
 }
 

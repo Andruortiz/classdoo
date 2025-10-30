@@ -249,7 +249,6 @@ public enum MessagesEnum {
             "Se capturó un Throwable crítico durante la operación de búsqueda por ID."
     ),
 
-    // java
     CITY_ERROR_FIND_ALL_SQL(
             "Error al obtener todas las ciudades",
             "Ocurrió un problema al intentar obtener las ciudades desde la fuente de datos. Por favor intente nuevamente o contacte al administrador."

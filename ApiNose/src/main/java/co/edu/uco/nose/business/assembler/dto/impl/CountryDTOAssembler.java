@@ -6,7 +6,9 @@ import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.dto.CountryDTO;
 import co.edu.uco.nose.business.domain.CountryDomain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public final class CountryDTOAssembler implements DTOAssembler<CountryDTO, CountryDomain> {
@@ -37,7 +39,11 @@ public final class CountryDTOAssembler implements DTOAssembler<CountryDTO, Count
     }
 
     @Override
-    public List<CountryDTO> toDTO(List<CountryDomain> domaindList) {
-        return List.of();
+    public List<CountryDTO> toDTO(List<CountryDomain> domainList) {
+        var dtoList = new ArrayList<CountryDTO>();
+        for (var domain : ObjectHelper.getDefault(domainList, List.<CountryDomain>of())) {
+            dtoList.add(toDTO(domain));
+        }
+        return dtoList;
     }
 }
