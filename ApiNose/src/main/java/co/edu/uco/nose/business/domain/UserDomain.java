@@ -9,10 +9,10 @@ public final class UserDomain extends Domain {
     private IdTypeDomain idType;
     private String idNumber;
     private String firstName;
-    private String middleName;
-    private String firstLastName;
-    private String secondLastName;
-    private CityDomain cityOfResidence;
+    private String secondName;
+    private String firstSurname;
+    private String secondSurname;
+    private CityDomain homeCity;
     private String email;
     private String mobileNumber;
     private boolean emailConfirmed;
@@ -23,10 +23,10 @@ public final class UserDomain extends Domain {
         setIdType(new IdTypeDomain());
         setIdNumber(TextHelper.getDefault());
         setFirstName(TextHelper.getDefault());
-        setMiddleName(TextHelper.getDefault());
-        setFirstLastName(TextHelper.getDefault());
-        setSecondLastName(TextHelper.getDefault());
-        setCityOfResidence(new CityDomain());
+        setSecondName(TextHelper.getDefault());
+        setFirstSurname(TextHelper.getDefault());
+        setSecondSurname(TextHelper.getDefault());
+        setHomeCity(new CityDomain());
         setEmail(TextHelper.getDefault());
         setMobileNumber(TextHelper.getDefault());
         setEmailConfirmed(false);
@@ -34,19 +34,19 @@ public final class UserDomain extends Domain {
     }
 
     public UserDomain(final UUID id, final IdTypeDomain idType, final String idNumber,
-                      final String firstName, final String middleName,
-                      final String firstLastName, final String secondLastName,
-                      final CityDomain cityOfResidence, final String email,
+                      final String firstName, final String secondName,
+                      final String firstSurname, final String secondSurname,
+                      final CityDomain homeCity, final String email,
                       final String mobileNumber, final boolean emailConfirmed,
                       final boolean mobileConfirmed) {
         super(UUIDHelper.getUUIDHelper().getDefault(id));
         setIdType(idType);
         setIdNumber(idNumber);
         setFirstName(firstName);
-        setMiddleName(middleName);
-        setFirstLastName(firstLastName);
-        setSecondLastName(secondLastName);
-        setCityOfResidence(cityOfResidence);
+        setSecondName(secondName);
+        setFirstSurname(firstSurname);
+        setSecondSurname(secondSurname);
+        setHomeCity(homeCity);
         setEmail(email);
         setMobileNumber(mobileNumber);
         setEmailConfirmed(emailConfirmed);
@@ -58,10 +58,10 @@ public final class UserDomain extends Domain {
         setIdType(new IdTypeDomain());
         setIdNumber(TextHelper.getDefault());
         setFirstName(TextHelper.getDefault());
-        setMiddleName(TextHelper.getDefault());
-        setFirstLastName(TextHelper.getDefault());
-        setSecondLastName(TextHelper.getDefault());
-        setCityOfResidence(new CityDomain());
+        setSecondName(TextHelper.getDefault());
+        setFirstSurname(TextHelper.getDefault());
+        setSecondSurname(TextHelper.getDefault());
+        setHomeCity(new CityDomain());
         setEmail(TextHelper.getDefault());
         setMobileNumber(TextHelper.getDefault());
         setEmailConfirmed(false);
@@ -99,36 +99,36 @@ public final class UserDomain extends Domain {
         this.firstName = TextHelper.getDefaultWithTrim(firstName);
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setMiddleName(final String middleName) {
-        this.middleName = TextHelper.getDefaultWithTrim(middleName);
+    public void setSecondName(final String secondName) {
+        this.secondName = TextHelper.getDefaultWithTrim(secondName);
     }
 
-    public String getFirstLastName() {
-        return firstLastName;
+    public String getFirstSurname() {
+        return firstSurname;
     }
 
-    public void setFirstLastName(final String firstLastName) {
-        this.firstLastName = TextHelper.getDefaultWithTrim(firstLastName);
+    public void setFirstSurname(final String firstSurname) {
+        this.firstSurname = TextHelper.getDefaultWithTrim(firstSurname);
     }
 
-    public String getSecondLastName() {
-        return secondLastName;
+    public String getSecondSurname() {
+        return secondSurname;
     }
 
-    public void setSecondLastName(final String secondLastName) {
-        this.secondLastName = TextHelper.getDefaultWithTrim(secondLastName);
+    public void setSecondSurname(final String secondSurname) {
+        this.secondSurname = TextHelper.getDefaultWithTrim(secondSurname);
     }
 
-    public CityDomain getCityOfResidence() {
-        return cityOfResidence;
+    public CityDomain getHomeCity() {
+        return homeCity;
     }
 
-    public void setCityOfResidence(final CityDomain cityOfResidence) {
-        this.cityOfResidence = (cityOfResidence == null) ? new CityDomain() : cityOfResidence;
+    public void setHomeCity(final CityDomain homeCity) {
+        this.homeCity = (homeCity == null) ? new CityDomain() : homeCity;
     }
 
     public String getEmail() {
