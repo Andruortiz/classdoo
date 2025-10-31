@@ -1,8 +1,9 @@
 package co.edu.uco.nose.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,63 @@ public class UserController {
     @GetMapping("/dummy")
     public UserDTO getUserDTODummy() {
         return new UserDTO();
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<UserDTO>> findById(@PathVariable UUID id) {
+        Response<UserDTO> responseObjectData = Response.createSuccededResponse();
+        HttpStatusCode responseStatusCode = HttpStatus.OK;
+
+        try {
+            var facade = new UserFacadeImpl();
+            List<UserDTO> user = new ArrayList<UserDTO>();
+            user.add(facade.findSpecificUser(id));
+            responseObjectData.setData(user);
+            responseObjectData.addMessage("User found succesfully!");
+        } catch (final NoseException exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(exception.getUserMessage());
+            responseStatusCode = HttpStatus.BAD_REQUEST;
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            var userMessage = "Unexpected error";
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(userMessage);
+            responseStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(responseObjectData, responseStatusCode);
+
+    }
+
+
+    @GetMapping("/userFilter")
+    public ResponseEntity<Response<UserDTO>> findByFilter(@RequestBody UserDTO userFilters)
+    {
+        Response<UserDTO> responseObjectData = Response.createSuccededResponse();
+        HttpStatusCode responseStatusCode = HttpStatus.OK;
+
+        try {
+
+            var facade = new UserFacadeImpl();
+            responseObjectData.setData(facade.findUserByFilter(userFilters));
+            responseObjectData.addMessage("Users filtered successfully!");
+        } catch (final NoseException exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(exception.getUserMessage());
+            responseStatusCode = HttpStatus.BAD_REQUEST;
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            var userMessage = "Unexpected error";
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(userMessage);
+            responseStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(responseObjectData, responseStatusCode);
     }
 
     @GetMapping
@@ -53,7 +111,7 @@ public class UserController {
     public ResponseEntity<Response<UserDTO>> registerNewUserInformation(@RequestBody UserDTO user) {
 
         Response<UserDTO> responseObjectData = Response.createSuccededResponse();
-        HttpStatusCode responseStatusCode = HttpStatus.CREATED;
+        HttpStatusCode responseStatusCode = HttpStatus.OK;
 
         try {
             var facade = new UserFacadeImpl();
@@ -78,13 +136,51 @@ public class UserController {
 
 
     @PutMapping("/{id}")
-    public String updateUserInformation(@PathVariable UUID id, @RequestBody UserDTO user) {
-        return "UPDATE: User updated!";
+    public ResponseEntity<Response<UserDTO>> updateUserInformation(@PathVariable UUID id, @RequestBody UserDTO user) {
+        Response<UserDTO> responseObjectData = Response.createSuccededResponse();
+        HttpStatusCode responseStatusCode = HttpStatus.OK;
+        try {
+            var facade = new UserFacadeImpl();
+            facade.updateUserInformation(id, user);
+            responseObjectData.addMessage(" User updated successfully!");
+        } catch (final NoseException exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(exception.getUserMessage());
+            responseStatusCode = HttpStatus.BAD_REQUEST;
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(" Unexpected error");
+            responseStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(responseObjectData, responseStatusCode);
+
     }
 
     @DeleteMapping("/{id}")
-    public String dropUserInformation(@PathVariable UUID id) {
-        return "DELETE: User deleted!";
+    public ResponseEntity<Response<UserDTO>> dropUserInformation(@PathVariable UUID id) {
+        Response<UserDTO> responseObjectData = Response.createSuccededResponse();
+        HttpStatusCode responseStatusCode = HttpStatus.OK;
+
+        try {
+            var facade = new UserFacadeImpl();
+            facade.dropUserInformation(id);
+            responseObjectData.addMessage("🗑 User deleted successfully!");
+        } catch (final NoseException exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(exception.getUserMessage());
+            responseStatusCode = HttpStatus.BAD_REQUEST;
+            exception.printStackTrace();
+        } catch (final Exception exception) {
+            responseObjectData = Response.createFailedResponse();
+            responseObjectData.addMessage(" Unexpected error");
+            responseStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            exception.printStackTrace();
+        }
+
+        return new ResponseEntity<>(responseObjectData, responseStatusCode);
     }
 
 
@@ -92,7 +188,7 @@ public class UserController {
     public ResponseEntity<String> handleDeserializationError(HttpMessageNotReadableException ex) {
         return ResponseEntity
                 .badRequest()
-                .body("❌ Error al interpretar el JSON: " + ex.getMessage());
+                .body("Error al interpretar el JSON: " + ex.getMessage());
     }
 
 }

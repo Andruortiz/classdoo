@@ -9,6 +9,7 @@ public interface DTOAssembler<T, D> {
 
     List<T> toDTO(List<D> domainList);
 
+
 }
 
 

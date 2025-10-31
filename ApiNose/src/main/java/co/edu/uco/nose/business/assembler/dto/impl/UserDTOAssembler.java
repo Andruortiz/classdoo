@@ -7,6 +7,7 @@ import co.edu.uco.nose.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class UserDTOAssembler implements DTOAssembler<UserDTO, UserDomain> {
 
@@ -44,12 +45,16 @@ public final class UserDTOAssembler implements DTOAssembler<UserDTO, UserDomain>
     }
 
     @Override
-    public List<UserDTO> toDTO(List<UserDomain> domaindList) {
+    public List<UserDTO> toDTO(List<UserDomain> domainList) {
 
         var userDtoList = new ArrayList<UserDTO>();
-        for (var userDomain: domaindList){
+        for (var userDomain: domainList){
             userDtoList.add(toDTO(userDomain));
         }
         return userDtoList;
     }
+
+
+
+
 }

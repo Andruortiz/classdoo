@@ -13,7 +13,17 @@ public interface UserFacade {
 
     List<UserDTO> findAllUser();
 
+
+
     List<UserDTO>  findUserByFilter(UserDTO userFilters);
 
     UserDTO findSpecificUser(UUID id);
+
+    void confirmMobileNumber(UUID userId, int confirmationCode);
+
+    void confirmEmail(UUID userid, int confirmationCode);
+
+    void sendMobileNumberConfirmation(UUID userId);
+
+    void sendEmailConfirmation(UUID userId);
 }

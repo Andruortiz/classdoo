@@ -56,6 +56,10 @@ public class Response<T> {
         this.data = ObjectHelper.getDefault(data, new ArrayList<T>());
     }
 
+    public void setData(T singleObject) {
+        this.data = List.of(singleObject);
+    }
+
     public boolean isResponseSucceded() {
         return responseSucceded;
     }
