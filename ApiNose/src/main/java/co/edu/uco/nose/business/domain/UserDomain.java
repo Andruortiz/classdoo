@@ -16,7 +16,7 @@ public final class UserDomain extends Domain {
     private String email;
     private String mobileNumber;
     private boolean emailConfirmed;
-    private boolean mobileConfirmed;
+    private boolean mobileNumberConfirmed;
 
     public UserDomain() {
         super(UUIDHelper.getUUIDHelper().getDefault());
@@ -30,7 +30,7 @@ public final class UserDomain extends Domain {
         setEmail(TextHelper.getDefault());
         setMobileNumber(TextHelper.getDefault());
         setEmailConfirmed(false);
-        setMobileConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
     public UserDomain(final UUID id, final IdTypeDomain idType, final String idNumber,
@@ -50,7 +50,7 @@ public final class UserDomain extends Domain {
         setEmail(email);
         setMobileNumber(mobileNumber);
         setEmailConfirmed(emailConfirmed);
-        setMobileConfirmed(mobileConfirmed);
+        setMobileNumberConfirmed(mobileConfirmed);
     }
 
     public UserDomain(final UUID id) {
@@ -65,7 +65,7 @@ public final class UserDomain extends Domain {
         setEmail(TextHelper.getDefault());
         setMobileNumber(TextHelper.getDefault());
         setEmailConfirmed(false);
-        setMobileConfirmed(false);
+        setMobileNumberConfirmed(false);
     }
 
     public UserDomain(UUID id, String firstName, String email) {
@@ -155,11 +155,11 @@ public final class UserDomain extends Domain {
         this.emailConfirmed = emailConfirmed;
     }
 
-    public boolean isMobileConfirmed() {
-        return mobileConfirmed;
+    public boolean isMobileNumberConfirmed() {
+        return mobileNumberConfirmed;
     }
 
-    public void setMobileConfirmed(final boolean mobileConfirmed) {
-        this.mobileConfirmed = mobileConfirmed;
+    public void setMobileNumberConfirmed(final boolean mobileNumberConfirmed) {
+        this.mobileNumberConfirmed = mobileNumberConfirmed;
     }
 }

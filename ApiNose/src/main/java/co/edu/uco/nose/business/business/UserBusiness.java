@@ -26,7 +26,7 @@ public interface UserBusiness {
     void confirmMobileNumber(UUID id, int confirmationCode);
     void confirmEmail(UUID id);
     void sendMobileNumberConfirmation(UUID id);
-    void senddEmailConfirmation(UUID id);
+    void sendEmailConfirmation(UUID id);
 
 
 

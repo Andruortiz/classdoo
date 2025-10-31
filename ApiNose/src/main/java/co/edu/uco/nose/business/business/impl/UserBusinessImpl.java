@@ -41,7 +41,6 @@ public final  class UserBusinessImpl implements UserBusiness {
         if (user.getMobileNumber() == null || user.getMobileNumber().length() != 10) {
             throw new IllegalArgumentException("Número de teléfono inválido");
         }
-        // Agrega más validaciones según reglas de negocio
     }
 
     private void checkUserUniqueness(UserDomain user) {
@@ -164,7 +163,7 @@ public final  class UserBusinessImpl implements UserBusiness {
     }
 
     @Override
-    public void senddEmailConfirmation(UUID id) {
+    public void sendEmailConfirmation(UUID id) {
 
     }
 }
