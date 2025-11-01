@@ -1,6 +1,8 @@
 package co.edu.uco.nose.business.business;
 
+import co.edu.uco.nose.business.business.validator.user.ValidateDataUserConsistencyForRegisterNewInformation;
 import co.edu.uco.nose.business.domain.UserDomain;
+import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
 import co.edu.uco.nose.entity.UserEntity;
 
 import java.util.List;
@@ -10,8 +12,23 @@ public interface UserBusiness {
 
 
 
-    void registerNewUserInformation(UserDomain userDomain);
+    void registerNewUserInformation(UserDomain userDomain){
+
+        ValidateDataUserConsistencyForRegisterNewInformation(userDomain);
+
+    }
+
+
     void dropUserInformation(UUID id);
+
+
+    private UUID generateId(){
+        var id = UUIDHelper.getUUIDHelper().generateNewUUID()
+    do{
+        var userEntity = daoFactory.getUserDAO().findById(id); 
+    }
+
+    }
     void updateUserInformation(UUID id, UserDomain userDomain);
 
     List<UserDomain> findAllUser();

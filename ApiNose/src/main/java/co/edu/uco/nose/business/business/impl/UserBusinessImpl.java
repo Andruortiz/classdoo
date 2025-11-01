@@ -154,8 +154,7 @@ public final  class UserBusinessImpl implements UserBusiness {
 
     @Override
     public void confirmEmail(UUID id) {
-
-    }
+       }
 
     @Override
     public void sendMobileNumberConfirmation(UUID id) {
@@ -166,4 +165,5 @@ public final  class UserBusinessImpl implements UserBusiness {
     public void sendEmailConfirmation(UUID id) {
 
     }
+
 }
