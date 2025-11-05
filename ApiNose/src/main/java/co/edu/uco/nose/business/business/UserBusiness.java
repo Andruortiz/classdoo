@@ -12,23 +12,9 @@ public interface UserBusiness {
 
 
 
-    void registerNewUserInformation(UserDomain userDomain){
 
-        ValidateDataUserConsistencyForRegisterNewInformation(userDomain);
-
-    }
-
-
+    void registerNewUserInformation(UserDomain userDomain);
     void dropUserInformation(UUID id);
-
-
-    private UUID generateId(){
-        var id = UUIDHelper.getUUIDHelper().generateNewUUID()
-    do{
-        var userEntity = daoFactory.getUserDAO().findById(id); 
-    }
-
-    }
     void updateUserInformation(UUID id, UserDomain userDomain);
 
     List<UserDomain> findAllUser();

@@ -6,48 +6,60 @@ import co.edu.uco.nose.business.business.rule.generics.StringValueIsPresentRule;
 import co.edu.uco.nose.business.business.rule.user.UserMobileNumberDoesNotExistRule;
 import co.edu.uco.nose.business.business.validator.Validator;
 import co.edu.uco.nose.business.domain.UserDomain;
+import co.edu.uco.nose.crosscuting.helper.TextHelper;
 
 public class ValidateDataUserConsistencyForRegisterNewInformation implements Validator{
-
-
-    private static final Rule instance = new ValidateDataUserConsistencyForRegisterNewInformation();
-
-    private ValidateDataUserConsistencyForRegisterNewInformation () {
+    private static final Validator instance = new ValidateDataUserConsistencyForRegisterNewInformation();
+    private ValidateDataUserConsistencyForRegisterNewInformation() {
 
     }
 
-    private static void executeValidation(final Object... data) {
-        instance.execute(data);
+    public static void executeValidation(final Object... data) {
+        instance.validate(data);
+
     }
 
     @Override
     public void validate(final Object... data) {
-
-
-        //validacion del objeto data
+        // Validaciones del objeto data
         var userDomainData = (UserDomain) data[0];
 
-        //valid empty data
-        validateEmptyData();
-        //valid data length
-        vali
-        //valid data format
-        //vaalid data valid range
+        // Valid empty data
+        validateEmptyData(userDomainData);
 
+        // Valid data length
+        validateDataLength(userDomainData);
+
+        // Valid data format
+
+        // Valid data valid range
     }
 
-
-
     private void validateEmptyData(final UserDomain data) {
-        private String idNumber;
-        private String firstName;
-        private String secondName;
-        private String firstSurname;
-        private String secondSurname;
 
-        StringValueIsPresentRule.executeRule(data.getIdNumber(), "");
-        StringValueIsPresentRule.executeRule(data.getFirstName(), "");
-        StringValueIsPresentRule.executeRule(data.getFirstSurname(), "");
-        //continue another validation
+        StringValueIsPresentRule.executeRule(data.getIdNumber(), "Numero de identificacion", true);
+        StringValueIsPresentRule.executeRule(data.getFirstName(), "Primer Nombre", true);
+        StringValueIsPresentRule.executeRule(data.getFirstSurname(), "Primer apellido", true);
+    }
+
+    private void validateDataLength(final UserDomain data) {
+
+
+        StringLengthValuelsValidRule.executeRule(data.getIdNumber(), "Numero de identificacion", 1, 50, true);
+        StringLengthValuelsValidRule.executeRule(data.getFirstName(), "Primer Nombre", 1, 100, true);
+
+        if (!TextHelper.isEmpty(data.getSecondName())) {
+            StringLengthValuelsValidRule.executeRule(data.getSecondName(), "Segundo Nombre", 1, 100, true);
+        }
+
+        StringLengthValuelsValidRule.executeRule(data.getFirstSurname(), "Primer apellido", 1, 100, true);
+        if (!TextHelper.isEmpty(data.getSecondSurname())) {
+            StringLengthValuelsValidRule.executeRule(data.getSecondSurname(), "Segundo apellido", 1, 100, true);
+        }
+
+
+
+
+
     }
 }

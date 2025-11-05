@@ -2,6 +2,8 @@ package co.edu.uco.nose.business.business.impl;
 
 import co.edu.uco.nose.business.assembler.entity.impl.UserEntityAssembler;
 import co.edu.uco.nose.business.business.UserBusiness;
+import co.edu.uco.nose.business.business.validator.idtype.ValidateIdTypeExistsById;
+import co.edu.uco.nose.business.business.validator.user.ValidateDataUserConsistencyForRegisterNewInformation;
 import co.edu.uco.nose.business.domain.UserDomain;
 import co.edu.uco.nose.crosscuting.exception.NoseException;
 import co.edu.uco.nose.crosscuting.helper.UUIDHelper;
@@ -24,13 +26,34 @@ public final  class UserBusinessImpl implements UserBusiness {
 
     @Override
     public void registerNewUserInformation(UserDomain userDomain) {
+// 1. Validar que la informacion sea consistente a nivel de Tipo de Dato,
+        //longitud, obligatoriedad, formato, rango, reglas propias del objeto
+        ValidateDataUserConsistencyForRegisterNewInformation.executeValidation(userDomain);
 
-        var id = UUIDHelper.getUUIDHelper().generateNewUUID();
+        // 2. Validar que exista tipo de identificacion
+        ValidateIdTypeExistsById.executeValidation(userDomain.getIdType().getId(), daoFactory);
+
+
+
+        // 7. Ensamblar  objeto como Entity
         var userEntity = UserEntityAssembler.getUserEntityAssembler().toEntity(userDomain);
 
-        userEntity.setId(id);
+        // 8. Generar ID
+        userEntity.setId(generateId());
 
+        // 9. Registrar la informacion del nuevo usuario
         daoFactory.getUserDAO().create(userEntity);
+    }
+
+    private UUID generateId() {
+        var id = UUIDHelper.getUUIDHelper().generateNewUUID();
+        var UserEntity = daoFactory.getUserDAO().findById(id);
+
+        while (!UUIDHelper.getUUIDHelper().isDefaultUUID(UserEntity.getId())) {
+            id = UUIDHelper.getUUIDHelper().generateNewUUID();
+            UserEntity  = daoFactory.getUserDAO().findById(id);
+        }
+        return id;
     }
 
     private void validateUserDomain(UserDomain user) {
@@ -102,13 +125,26 @@ public final  class UserBusinessImpl implements UserBusiness {
     @Override
     public List<UserDomain> findAllUser() {
         try {
-            var entities = daoFactory.getUserDAO().findAll();
-            return UserEntityAssembler.getUserEntityAssembler().toDomainList(entities);
+            System.out.println("➡️ Entrando a findAllUser()...");
+            var userDAO = daoFactory.getUserDAO();
+
+            System.out.println("➡️ Ejecutando findAll() del UserDAO...");
+            var entities = userDAO.findAll();
+            System.out.println("✅ Cantidad de entidades obtenidas: " + (entities != null ? entities.size() : 0));
+
+            System.out.println("➡️ Convirtiendo entidades a dominio...");
+            var domains = UserEntityAssembler.getUserEntityAssembler().toDomainList(entities);
+//            System.out.println("✅ Conversión exitosa. Cantidad: " + domains.size());
+
+            return domains;
+
         } catch (Exception exception) {
+            exception.printStackTrace();
             throw NoseException.create(exception, TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getTitle(),
                     TECHNICAL_ERROR_FIND_ALL_UNEXPECTED.getContent());
         }
     }
+
 
 
     @Override

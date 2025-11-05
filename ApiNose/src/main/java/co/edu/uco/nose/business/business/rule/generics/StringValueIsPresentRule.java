@@ -11,13 +11,13 @@ public final class StringValueIsPresentRule implements Rule {
 
 
     private static final Rule instance = new StringValueIsPresentRule();
-
-    private StringValueIsPresentRule () {
+    private StringValueIsPresentRule() {
 
     }
 
-    private static void executeRule(final Object... data) {
+    public static void executeRule(final Object... data) {
         instance.execute(data);
+
     }
 
 

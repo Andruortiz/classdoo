@@ -122,8 +122,10 @@ public final class UserFacadeImpl implements UserFacade {
         var business = new UserBusinessImpl(daoFactory);
 
         try {
+            daoFactory.initTransaction();
             List<UserDomain> domainList = business.findAllUser();
             List<UserDTO> dtoList = UserDTOAssembler.getUserDTOAssembler().toDTO(domainList);
+            daoFactory.commitTransaction();
             return dtoList;
 
         } catch (final NoseException exception) {

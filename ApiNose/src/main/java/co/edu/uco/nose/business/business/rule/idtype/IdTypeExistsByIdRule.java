@@ -9,18 +9,15 @@ import co.edu.uco.nose.data.factory.DAOFactory;
 
 import java.util.UUID;
 
-public class IdTypeExistById implements Rule {
-
-
-
-    private static final Rule instance = new IdTypeExistById();
-
-    private IdTypeExistById () {
+public final class IdTypeExistsByIdRule implements Rule {
+    private static final Rule instance = new IdTypeExistsByIdRule();
+    private IdTypeExistsByIdRule() {
 
     }
 
-    private static void executeRule(final Object... data) {
+    public static void executeRule(final Object... data) {
         instance.execute(data);
+
     }
     @Override
     public void execute(final Object... data) {
